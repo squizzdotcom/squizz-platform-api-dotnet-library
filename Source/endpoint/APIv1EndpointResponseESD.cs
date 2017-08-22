@@ -13,9 +13,9 @@ using EcommerceStandardsDocuments;
 using System.Runtime.Serialization;
 namespace Squizz.Platform.API.v1.endpoint
 {
-    /// <summary>Represents the response returned from the procure purchase order from supplier endpoint in the platform's API</summary>
+    /// <summary>Represents the response returned from an endpoint in the platform's API, containing a type of Ecommerce Standards Document</summary>
     [DataContract]
-    public class APIv1EndpointResponseESD
+    public class APIv1EndpointResponseESD<T>
     {
         public const string ESD_CONFIG_ORDERS_WITH_UNMAPPED_LINES = "orders_with_unmapped_lines";
         public const string ESD_CONFIG_ORDERS_WITH_UNPRICED_LINES = "orders_with_unpriced_lines";
@@ -40,6 +40,6 @@ namespace Squizz.Platform.API.v1.endpoint
         public string session_valid = "";
 
         [DataMember]
-        public ESDocument esDocument;
+        public T esDocument;
     }
 }

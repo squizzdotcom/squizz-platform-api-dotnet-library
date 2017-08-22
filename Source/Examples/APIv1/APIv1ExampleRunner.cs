@@ -23,6 +23,15 @@ namespace Squizz.Platform.API.Examples.APIv1
         /// <summary>Main entry point to run examples for calling the SQUIZZ.com API</summary>
         public static void Main()
         {
+            string[] menuOptions = new string[]{
+                " - Create Organisation API Sesssion",
+                " - Destroy Organisation API Sesssion",
+                " - Validate Organisation API Sesssion",
+                " - Validate/Create Organisation API Sesssion",
+                " - Procure Purchase Order From Supplier",
+                " - Quit"
+            };
+
             Console.WriteLine(CONSOLE_LINE);
             Console.WriteLine("   _____ ____  __  ________________    __________  __  ___");
             Console.WriteLine("  / ___// __ \\/ / / /  _/__  /__  /   / ____/ __ \\/  |/  /");
@@ -43,23 +52,24 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine(CONSOLE_LINE);
                 Console.WriteLine("Select from one of the API examples to run: ");
                 Console.WriteLine(CONSOLE_LINE);
-                Console.WriteLine("1 - Create Organisation API Sesssion");
-                Console.WriteLine("2 - Destroy Organisation API Sesssion");
-                Console.WriteLine("3 - Validate Organisation API Sesssion");
-                Console.WriteLine("4 - Validate/Create Organisation API Sesssion");
-                Console.WriteLine("5 - Quit");
+
+                //display menu options
+                for(int i=0; i < menuOptions.Length; i++)
+                {
+                    Console.WriteLine((i+1).ToString()+ menuOptions[i]);
+                }
 
                 bool optionSelected = false;
-                int optionNumber = 5;
+                int optionNumber = menuOptions.Length;
 
                 //get the selected option
                 while (!optionSelected)
                 {
-                    Console.Write("Enter The Option Number: ");
+                    Console.Write("Enter Menu Option Number: ");
                     try
                     {
                         optionNumber = Convert.ToInt32(Console.ReadLine());
-                        optionSelected = (optionNumber >= 1 && optionNumber <= 5);
+                        optionSelected = (optionNumber >= 1 && optionNumber <= menuOptions.Length);
                     }
                     catch(Exception ex){}
                 }
@@ -78,6 +88,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 4:
                         APIv1ExampleRunnerValidateCreateOrgSession.runAPIv1ExampleRunnerValidateCreateOrgSession();
+                        break;
+                    case 5:
+                        APIv1ExampleRunnerProcurePurchaseOrderFromSupplier.runAPIv1ExampleRunnerProcurePurchaseOrderFromSupplier();
                         break;
                     default:
                         continueRunning = false;

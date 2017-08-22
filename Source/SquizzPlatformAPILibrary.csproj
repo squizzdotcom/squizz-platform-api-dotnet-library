@@ -33,6 +33,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EcommerceStandardsDocuments.Library, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\EcommerceStandardsDocuments.Library.1.1.1.0\lib\net40\EcommerceStandardsDocuments.Library.dll</HintPath>
@@ -57,11 +60,13 @@
     <Compile Include="APIv1Constants.cs" />
     <Compile Include="APIv1HTTPRequest.cs" />
     <Compile Include="APIv1OrgSession.cs" />
+    <Compile Include="endpoint\APIv1EndpointOrgProcurePurchaseOrderFromSupplier.cs" />
     <Compile Include="endpoint\APIv1EndpointResponse.cs" />
     <Compile Include="endpoint\APIv1EndpointResponseESD.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunner.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerCreateSession.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerDestroyOrgSession.cs" />
+    <Compile Include="Examples\APIv1\APIv1ExampleRunnerProcurePurchaseOrderFromSupplier.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerValidateCreateOrgSession.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerValidateOrgSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
