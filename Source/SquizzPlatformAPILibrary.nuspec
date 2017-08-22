@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Squizz.Platform.API</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/squizzdotcom/squizz-platform-api-dotnet-library</projectUrl>
+    <iconUrl>https://www.squizz.com/ui/resources/images/icons/squizz_icon_32.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release of version 0.1 of the Squizz.com API library. Documentation of the library can be found at https://github.com/squizzdotcom/squizz-platform-api-dotnet-library</releaseNotes>
+    <copyright>Copyright Squizz Pty Ltd 2017</copyright>
+    <tags>Platform API Library Ecommerce Electronic Data Interchange EDI Online Ordering Trading Transfer Squizz Integrated Ecommerce</tags>
+  </metadata>
+</package>
