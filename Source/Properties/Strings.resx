@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SERVER_ERROR_CONNECTION" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to an issue with connecting to the platform's servers. Check that your internet connection is available and no other networking issues are occurring.</value>
+  </data>
+  <data name="SERVER_ERROR_CUSTOMER_ACCOUNT_NO_ACCOUNT_PAYMENT_TYPE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to supplier organisation's customer account not having any On Account payment method set.</value>
+  </data>
+  <data name="SERVER_ERROR_CUSTOMER_ACCOUNT_ON_HOLD" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the customer account in the supplier's organisation being on hold and not allowing for further trading activity.</value>
+  </data>
+  <data name="SERVER_ERROR_CUSTOMER_ACCOUNT_OUTSIDE_BALANCE_LIMIT" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the customer account's balance in the supplier's organisation being over the allowed limit. Not further trading can occur with the account until payments have been made against the account's balance.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_IMPORT_ABORTED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the data import being aborted. It may have been aborted by a person or by the platform.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_IMPORT_BUSY" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to another data import already running or the API is busy processing other requests.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_IMPORT_MAX_IMPORTS_RUNNING" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the maximum number of data imports being run over a short period of time. Wait a while before calling the endpoint again and consider calling the endpoint less often.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_IMPORT_MISSING_IMPORT_TYPE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to no data type set indicating the kind of data being imported.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_IMPORT_NOT_FOUND" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to an incorrect or unsupported data type being set.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_JSON_MALFORMED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the data being imported in the JSON data format not able to be processed, because it has not been correctly formed. Check for syntax errors with the JSON data.</value>
+  </data>
+  <data name="SERVER_ERROR_DATA_JSON_WRONG_CONTENT_TYPE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the content type in the request headers not being set to application/json, specifying that data imported is in the JSON data format.</value>
+  </data>
+  <data name="SERVER_ERROR_ESD_DOCUMENT_HEADER_MALFORMED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the Ecommerce Standards Document uploaded missing an opening bracket in its JSON data.</value>
+  </data>
+  <data name="SERVER_ERROR_ESD_DOCUMENT_HEADER_MISSING_ATTRIBUTES" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the Ecommerce Standards Document being uploaded missing the dataRecords attribute that should contain the record data to import.</value>
+  </data>
+  <data name="SERVER_ERROR_ESD_DOCUMENT_NO_RECORD" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to Ecommerce Standards Document not containing any records to import. Look to add one or more records to the document.</value>
+  </data>
+  <data name="SERVER_ERROR_ESD_DOCUMENT_UNSUCCESSFUL" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to Ecommerce Standards Document failing to import. Check that the document was correctly formed.</value>
+  </data>
+  <data name="SERVER_ERROR_INCORRECT_API_CREDENTIALS" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to incorrect API credentials being given for the organisation.</value>
+  </data>
+  <data name="SERVER_ERROR_INCORRECT_DATA_TYPE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the data type specified not being supported or of the correct type.</value>
+  </data>
+  <data name="SERVER_ERROR_INSUFFICIENT_CREDIT" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation having insufficient trading tokens in the platform to process the request.</value>
+  </data>
+  <data name="SERVER_ERROR_INVALID_API_ACTION" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API, due to the endpoint being called not being found or no longer existing.</value>
+  </data>
+  <data name="SERVER_ERROR_INVALID_NOTIFICATION_CATEGORY" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to an incorrect notification category been given to it.</value>
+  </data>
+  <data name="SERVER_ERROR_IO" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to an IO (Reading or Writing) error.</value>
+  </data>
+  <data name="SERVER_ERROR_MALFORMED_URL" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to URL being not correctly set.</value>
+  </data>
+  <data name="SERVER_ERROR_NO_ORG_CUSTOMER_ACCOUNT_ASSIGNED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to no customer account in the supplier's organisation able to be found with the given account code.</value>
+  </data>
+  <data name="SERVER_ERROR_NO_ORG_CUSTOMER_ACCOUNT_SET" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the supplier organisation having no active customer accounts assigned to the customer organistion.</value>
+  </data>
+  <data name="SERVER_ERROR_NO_ORG_PEOPLE_TO_NOTIFY" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to no people being configured in the organisation to receive the notification.</value>
+  </data>
+  <data name="SERVER_ERROR_ORDER_MAPPED_PRODUCT_PRICE_NOT_FOUND" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to not being able to price a product in the supplier's organisation.</value>
+  </data>
+  <data name="SERVER_ERROR_ORDER_PRODUCT_NOT_MAPPED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to not being able to find a matching product in the supplier's organisation.</value>
+  </data>
+  <data name="SERVER_ERROR_ORG_DOES_NOT_EXIST" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation given not able to be found in the platform, or it is not active.</value>
+  </data>
+  <data name="SERVER_ERROR_ORG_INACTIVE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation being inactive or deleted from the platform.</value>
+  </data>
+  <data name="SERVER_ERROR_ORG_NOT_ENOUGH_CREDITS" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation not having enough trading tokens.</value>
+  </data>
+  <data name="SERVER_ERROR_ORG_NOT_FOUND" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API since no organisation could be found matching the ID given.</value>
+  </data>
+  <data name="SERVER_ERROR_ORG_NOT_SELLING" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation's Trading Status does not allow it to sell on the platform.</value>
+  </data>
+  <data name="SERVER_ERROR_PERMISSION_DENIED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to permission being denied to access data, or save data, or access the endpoint.</value>
+  </data>
+  <data name="SERVER_ERROR_REQUEST_PROTOCOL" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to an issue with the protocol used to call the endpoint.</value>
+  </data>
+  <data name="SERVER_ERROR_RESPONSE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the server returning a bad response. The platform's API may be unavailable, under heavy load, or a network connection error could be occurring.</value>
+  </data>
+  <data name="SERVER_ERROR_SECURITY_CERTIFICATE_NOT_FOUND" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the organisation's security certificate not able to found or does not exist.</value>
+  </data>
+  <data name="SERVER_ERROR_SENDER_DOES_NOT_MATCH_CERTIFICATE_COMMON_NAME" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API, due to the common name set in the organisation's security certificate not matching the IP address of the internet connection used to call the endpoint</value>
+  </data>
+  <data name="SERVER_ERROR_SESSION_INVALID" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API due to the API session not existing or previously destroyed.</value>
+  </data>
+  <data name="SERVER_ERROR_UNKNOWN" xml:space="preserve">
+    <value>An unknown or non-specified error occurred when calling SQUIZZ.com's API.</value>
+  </data>
+  <data name="SERVER_FAILURE" xml:space="preserve">
+    <value>An error occurred when SQUIZZ.com's API was called.</value>
+  </data>
+  <data name="SERVER_SUCCESS" xml:space="preserve">
+    <value>SQUIZZ.com API was successfully called.</value>
+  </data>
+</root>
