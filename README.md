@@ -14,7 +14,11 @@ If you are a software developer writing a .NET application then we recommend tha
 
 ## Getting Started
 
-To get started using the library within .NET applications, download the .NET API library and its dependent libraries from the [Release page](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/releases) and add references to in your application.
+To get started using the library within .NET applications, you can download the API library and its dependent libraries into your Visual Studio solution from [NuGET](https://www.nuget.org/) package manager. The library is hosted at [NuGet Squizz.Platform.API](https://www.nuget.org/packages/Squizz.Platform.API/) package. You can install the NuGET hosted package with the command line below, or visually find and install the package using [Visual Studio NuGET Package Manager](https://marketplace.visualstudio.com/items?itemName=NuGetTeam.NuGetPackageManager) plugin.
+```
+Install-Package Squizz.Platform.API -Version 1.0.0
+```
+Alternatively you can download and add the required files direct from the [Release page](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/releases). Once done then add references to the DLL files in your visual studio solution.
 The library contains dependencies on [Newtonsoft's Json.NET Library](https://www.newtonsoft.com/json) as well as the [Ecommerce Standards Documents .NET Library](https://github.com/squizzdotcom/ecommerce-standards-documents-dotnet-library)
 Once this library is referenced within your .NET application then to use it within a .NET class you can use the following "using" syntax:
 
@@ -88,8 +92,8 @@ namespace Squizz.Platform.API.Examples.APIv1
 
 The SQUIZZ.com platform's API has an endpoint that allows an orgnisation to import a purchase order. and have it procured/converted into a sales order of a designated supplier organisation. 
 This endpoint allows a customer organisation to commit to buy goods and services of an organisation, and have the order processed, and delivered by the supplier organisation.
-The endpoint relies upon a connection first being made between organisations within the SQUIZZ.com platform.
-The endpoint relies upon being able to find matching supplier products as what has been ordered.
+The endpoint relies upon a connection first being setup between organisations within the SQUIZZ.com platform.
+The endpoint relies upon being able to find matching supplier products as with what has been ordered.
 The endpoint has a number of other requirements. See the endpoint documentation for more details on these requirements.
 
 Each purchase order needs to be imported within a "Ecommerce Standards Document" that contains a record for each purchase order. Use the Ecommerce Standards library to easily create these documents and records.
