@@ -248,36 +248,57 @@ namespace Squizz.Platform.API.v1
                     //write the JSON to the request's data stream
                     using (StreamWriter requestStreamWriter = new StreamWriter(webConnection.GetRequestStream()))
                     {
-                        // write uncompressed JSON data to memory
-                        using (MemoryStream jsonStream = new MemoryStream())
-                        using (StreamWriter streamWriter = new StreamWriter(jsonStream))
-                        using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+                        //write ESDocument as JSON in the POST data if the document has been given
+                        if (esDocument != null)
                         {
-                            JsonSerializer serializer = new JsonSerializer();
-                            serializer.NullValueHandling = NullValueHandling.Ignore;
-                            serializer.MissingMemberHandling = MissingMemberHandling.Ignore;
-                            serializer.Serialize(jsonWriter, esDocument);
-                            jsonWriter.Flush();
+                            // write uncompressed JSON data to memory
+                            using (MemoryStream jsonStream = new MemoryStream())
+                            using (StreamWriter streamWriter = new StreamWriter(jsonStream))
+                            using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+                            {
+                                JsonSerializer serializer = new JsonSerializer();
+                                serializer.NullValueHandling = NullValueHandling.Ignore;
+                                serializer.MissingMemberHandling = MissingMemberHandling.Ignore;
+                                serializer.Serialize(jsonWriter, esDocument);
+                                jsonWriter.Flush();
 
-                            // compress the streamed JSON data into GZIP if allowed
+                                // compress the streamed JSON data into GZIP if allowed
+                                if (compressDataToGZIP)
+                                {
+                                    using (GZipStream gzipJSONStream = new GZipStream(webConnection.GetRequestStream(), CompressionMode.Compress, false))
+                                    {
+                                        byte[] jsonDataBytes = jsonStream.ToArray();
+                                        gzipJSONStream.Write(jsonDataBytes, 0, jsonDataBytes.Length);
+                                    }
+                                }
+                                else
+                                {
+                                    //process all the JSON stream data into a string
+                                    StreamReader jsonStreamReader = new StreamReader(jsonStream, Encoding.UTF8);
+                                    string jsonString = Encoding.Default.GetString(jsonStream.ToArray());
+                                    jsonStreamReader.Close();
+                                    //string jsonString = jsonStreamReader.ReadToEnd();
+
+                                    //write the JSON data to the http request stream
+                                    requestStreamWriter.Write(jsonString);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // compress the post data into GZIP if allowed
                             if (compressDataToGZIP)
                             {
-                                using (GZipStream gzipJSONStream = new GZipStream(webConnection.GetRequestStream(), CompressionMode.Compress, false))
+                                using (GZipStream gzipStream = new GZipStream(webConnection.GetRequestStream(), CompressionMode.Compress, false))
                                 {
-                                    byte[] jsonDataBytes = jsonStream.ToArray();
-                                    gzipJSONStream.Write(jsonDataBytes, 0, jsonDataBytes.Length);
+                                    byte[] jsonDataBytes = Encoding.ASCII.GetBytes(postData);
+                                    gzipStream.Write(jsonDataBytes, 0, jsonDataBytes.Length);
                                 }
                             }
                             else
                             {
-                                //process all the JSON stream data into a string
-                                StreamReader jsonStreamReader = new StreamReader(jsonStream, Encoding.UTF8);
-                                string jsonString = Encoding.Default.GetString(jsonStream.ToArray());
-                                jsonStreamReader.Close();
-                                //string jsonString = jsonStreamReader.ReadToEnd();
-
-                                //write the JSON data to the http request stream
-                                requestStreamWriter.Write(jsonString);
+                                //write the post data to the http request stream
+                                requestStreamWriter.Write(postData);
                             }
                         }
 

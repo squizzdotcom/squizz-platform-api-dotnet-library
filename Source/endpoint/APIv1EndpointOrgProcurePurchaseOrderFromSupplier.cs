@@ -5,16 +5,6 @@
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
 */
 
-/*
-package org.squizz.api.v1.endpoint;
-import org.esd.EcommerceStandardsDocuments.ESDocument;
-import org.esd.EcommerceStandardsDocuments.ESDocumentOrderPurchase;
-import org.esd.EcommerceStandardsDocuments.ESDocumentOrderSale;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-*/
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +74,7 @@ namespace Squizz.Platform.API.v1.endpoint
                 if (endpointResponse.result.ToUpper() != APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
                 {
                     //check if the session still exists
-                    if(endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_CODE_ERROR_SESSION_INVALID){
+                    if(endpointResponse.result_code.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_CODE_ERROR_SESSION_INVALID){
                         //mark that the session has expired
                         apiOrgSession.markSessionExpired();
                     }

@@ -29,6 +29,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 " - Validate Organisation API Sesssion",
                 " - Validate/Create Organisation API Sesssion",
                 " - Procure Purchase Order From Supplier",
+                " - Create Organisation Notification",
                 " - Quit"
             };
 
@@ -91,6 +92,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 5:
                         APIv1ExampleRunnerProcurePurchaseOrderFromSupplier.runAPIv1ExampleRunnerProcurePurchaseOrderFromSupplier();
+                        break;
+                    case 6:
+                        APIv1ExampleRunnerCreateOrgNotification.runAPIv1ExampleRunnerCreateOrgNotification();
                         break;
                     default:
                         continueRunning = false;

@@ -25,7 +25,7 @@ namespace Squizz.Platform.API.Examples.APIv1
             Console.WriteLine("Example - Procure Purchase Order From Supplier API Session");
             Console.WriteLine("");
 
-            //obtain or load in an organisation's API credentials, in this example from command line arguments
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
             Console.WriteLine("Enter Organisation ID:");
             string orgID = Console.ReadLine();
             Console.WriteLine("Enter Organisation API Key:");
@@ -202,12 +202,13 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
                     }
                 }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
             }
-
-            //next steps
-            //call other API endpoints...
-            //destroy API session when done...
-
+            
             Console.WriteLine("Example Finished.");
         }
     }
