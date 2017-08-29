@@ -313,6 +313,98 @@ namespace Squizz.Platform.API.Examples.APIv1
 }
 ```
 
+## Create Organisation Notification Endpoint
+The SQUIZZ.com platform's API has an endpoint that allows organisation notifications to be created in the platform. allowing people assigned to an organisation's notification category to receive a notification. 
+This can be used to advise such people of events happening external to the platform, such as sales, enquires, tasks completed through websites and other software.
+See the example below on how the call the Create Organisation Notification endpoint. Note that a session must first be created in the API before calling the endpoint.
+Read [https://www.squizz.com/docs/squizz/Platform-API.html#section854](https://www.squizz.com/docs/squizz/Platform-API.html#section854) for more documentation about the endpoint.
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Squizz.Platform.API.v1;
+using Squizz.Platform.API.v1.endpoint;
+using EcommerceStandardsDocuments;
+
+namespace Squizz.Platform.API.Examples.APIv1
+{
+    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then creating an organisation notification</summary>
+    public class APIv1ExampleRunnerCreateOrgNotification
+    {
+        public static void runAPIv1ExampleRunnerCreateOrgNotification()
+        {
+            Console.WriteLine("Example - Create Organisation Notification");
+            Console.WriteLine("");
+
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
+            Console.WriteLine("Enter Organisation ID:");
+            string orgID = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Key:");
+            string orgAPIKey = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Password:");
+            string orgAPIPass = Console.ReadLine();
+
+            //obtain or load in an organisation's API credentials, in this example from command line arguments
+            int sessionTimeoutMilliseconds = 20000;
+
+            //create an API session instance
+            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
+
+            //call the platform's API to request that a session is created
+            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
+
+            //check if the organisation's credentials were correct and that a session was created in the platform's API
+            if (endpointResponse.result.ToUpper() == (APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS))
+            {
+                //session has been created so now can call other API endpoints
+                Console.WriteLine("SUCCESS - API session has successfully been created.");
+            }
+            else
+            {
+                //session failed to be created
+                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
+            }
+
+            //create organisation notification if the API was successfully created
+            if (apiOrgSession.doesSessionExist())
+            {
+                //set the notification category that the organisation will display under in the platform, in this case the sales order category
+                String notifyCategory = APIv1EndpointOrgCreateNotification.NOTIFY_CATEGORY_ORDER_SALE;
+
+                //after 20 seconds give up on waiting for a response from the API when creating the notification
+                int timeoutMilliseconds = 20000;
+
+                //set the message that will appear in the notification, note the placeholders {1} and {2} that will be replaced with data values
+                String message = "A new {1} was created in {2} Website";
+
+                //set labels and links to place within the placeholders of the message
+                String[] linkLabels = new String[] { "Sales Order", "Acme Industries" };
+                String[] linkURLs = new String[] { "", "http://www.example.com/acmeindustries"};
+
+                //call the platform's API to create the organistion notification and have people assigned to organisation's notification category receive it
+                APIv1EndpointResponseESD<ESDocument> endpointResponseESD = APIv1EndpointOrgCreateNotification.call(apiOrgSession, timeoutMilliseconds, notifyCategory, message, linkURLs, linkLabels);
+
+                if (endpointResponseESD.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS) {
+                    Console.WriteLine("SUCCESS - organisation notification successfully created in the platform");
+                } else {
+                    Console.WriteLine("FAIL - organisation notification failed to be created. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
+                }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
+            }
+
+            Console.WriteLine("Example Finished.");
+        }
+    }
+}
+```
+
 ## Validate Organisation API Session Endpoint
 
 After a session has been created with SQUIZZ.com platform's API, if the same session is persistently being used over a long period time, then its worth validating that the session has not been destroyed by the API.
