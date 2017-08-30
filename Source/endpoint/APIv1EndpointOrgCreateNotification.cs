@@ -26,18 +26,18 @@ namespace Squizz.Platform.API.v1.endpoint
         public const string NOTIFY_CATEGORY_ORDER_PURCHASE = "order_purchase";
         public const string NOTIFY_CATEGORY_FEED = "feed";
         public const int MAX_MESSAGE_PLACEHOLDERS = 5;
-    
-        /**
-         * Calls the platform's API endpoint to create an organisation notification and notify selected people assigned to an organisation's notification category
-         * To allow notifications to be sent to the platform the organisation must have sufficient trading tokens
-         * @param apiOrgSession existing organisation API session
-         * @param endpointTimeoutMilliseconds amount of milliseconds to wait after calling the the API before giving up, set a positive number
-         * @param notifyCategory notification category that the notification appears within for the organisation's people. Set to one of the NOTIFY_CATEGORY_ constants
-         * @param message message to display in the notification. Put placeholders in message {1}, {2}, {3}, {4}, {5} to replace with links or labels
-         * @param linkURLs ordered array of URLs to replace in each of the place holders of the message. Set empty strings to ignore placing values into place holders
-         * @param linkLabels ordered array of labels to replace in each of the place holders of the message. Set empty strings to ignore placing values into place holders
-         * @return response from calling the API endpoint
-         */
+        
+        /// <summary>
+        ///     Calls the platform's API endpoint to create an organisation notification and notify selected people assigned to an organisation's notification category
+        ///     To allow notifications to be sent to the platform the organisation must have sufficient trading tokens
+        /// </summary>
+        /// <param name="apiOrgSession">existing organisation API session</param>
+        /// <param name="endpointTimeoutMilliseconds">amount of milliseconds to wait after calling the the API before giving up, set a positive number</param>
+        /// <param name="notifyCategory">notification category that the notification appears within for the organisation's people. Set to one of the NOTIFY_CATEGORY_ constants</param>
+        /// <param name="message">message to display in the notification. Put placeholders in message {1}, {2}, {3}, {4}, {5} to replace with links or labels</param>
+        /// <param name="linkURLs">ordered array of URLs to replace in each of the place holders of the message. Set empty strings to ignore placing values into place holders</param>
+        /// <param name="linkLabels">ordered array of labels to replace in each of the place holders of the message. Set empty strings to ignore placing values into place holders</param>
+        /// <returns>response from calling the API endpoint</returns>
         public static APIv1EndpointResponseESD<ESDocument> call(APIv1OrgSession apiOrgSession, int endpointTimeoutMilliseconds, string notifyCategory, string message, string[] linkURLs, string[] linkLabels)
         {
             String endpointParams = "";

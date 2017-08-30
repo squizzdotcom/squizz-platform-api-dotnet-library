@@ -313,6 +313,361 @@ namespace Squizz.Platform.API.Examples.APIv1
 }
 ```
 
+## Retrieve Organisation Data Endpoint
+The SQUIZZ.com platform's API has an endpoint that allows a variety of different types of data to be retrieved from another organisation stored on the platform.
+The organisational data that can be retrieved includes products, product stock quantities, and product pricing.
+The data retrieved can be used to allow an organisation to set additional information about products being bought or sold, as well as being used in many other ways.
+Each kind of data retrieved from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with each document containing an array of zero or more records. Use the Ecommerce Standards library to easily read through these documents and records, to find data natively using .NET classes.
+Read [https://www.squizz.com/docs/squizz/Platform-API.html#section969](https://www.squizz.com/docs/squizz/Platform-API.html#section969) for more documentation about the endpoint and its requirements.
+See examples below on how the call the Retrieve Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
+
+### Retrieve Organisation Product Data Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Squizz.Platform.API.v1;
+using Squizz.Platform.API.v1.endpoint;
+using EcommerceStandardsDocuments;
+
+namespace Squizz.Platform.API.Examples.APIv1
+{
+    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then retrieves Ecommerce data from a conencted organisation in the platform</summary>
+    public class APIv1ExampleRunnerRetrieveOrgESDDataProduct
+    {
+        public static void runAPIv1ExampleRunnerRetrieveOrgESDDataProduct()
+        {
+            Console.WriteLine("Example - Retrieve Supplier Organisation Product Data");
+            Console.WriteLine("");
+
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
+            Console.WriteLine("Enter Organisation ID:");
+            string orgID = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Key:");
+            string orgAPIKey = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Password:");
+            string orgAPIPass = Console.ReadLine();
+            Console.WriteLine("Enter Supplier Organisation ID:");
+            string supplierOrgID = Console.ReadLine();
+
+            //create an API session instance
+            int sessionTimeoutMilliseconds = 20000;
+            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
+
+            //call the platform's API to request that a session is created
+            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
+
+            //check if the organisation's credentials were correct and that a session was created in the platform's API
+            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+            {
+                //session has been created so now can call other API endpoints
+                Console.WriteLine("SUCCESS - API session has successfully been created.");
+            }
+            else
+            {
+                //session failed to be created
+                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
+            }
+
+            //import organisation data if the API was successfully created
+            if (apiOrgSession.doesSessionExist())
+            {
+                //after 60 seconds give up on waiting for a response from the API when creating the notification
+                int timeoutMilliseconds = 60000;
+
+                //loop through retrieving pages of records from the API
+                bool hasMoreRecordsToRetrieve = true;
+                int recordStartIndex = 0;
+                while(hasMoreRecordsToRetrieve)
+                {
+                    //call the platform's API to get the supplier organisation's product data
+                    APIv1EndpointResponseESD<ESDocumentProduct> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProduct.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
+                    ESDocumentProduct esDocumentProduct = (ESDocumentProduct)endpointResponseESD.esDocument;
+
+                    //check that the data successfully imported
+                    if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+                    {
+                        Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
+                        Console.WriteLine("\nProduct Records Returned: " + esDocumentProduct.totalDataRecords);
+
+                        //check that records have been placed into the standards document
+                        if (esDocumentProduct.dataRecords != null) {
+                            Console.WriteLine("Product Records:");
+
+                            //iterate through each product record stored within the standards document
+                            int i = 0;
+                            foreach(ESDRecordProduct productRecord in esDocumentProduct.dataRecords)
+                            {
+                                //output details of the product record
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+                                Console.WriteLine("  Product Record #: " + i);
+                                Console.WriteLine("  Key Product ID: " + productRecord.keyProductID);
+                                Console.WriteLine("    Product Code: " + productRecord.productCode);
+                                Console.WriteLine("            Name: " + productRecord.name);
+                                Console.WriteLine("         Barcode: " + productRecord.barcode);
+                                Console.WriteLine(" Stock Available: " + productRecord.stockQuantity);
+                                Console.WriteLine("           Brand: " + productRecord.brand);
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+
+                                i++;
+                            }
+                        }
+
+                        //check to see if a full page of records were retrieved and if there is more records to get
+                        if (esDocumentProduct.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST;
+                        }else{
+                            hasMoreRecordsToRetrieve = false;
+                        }
+                    } else {
+                        Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
+                        break;
+                    }
+                }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
+            }
+        }
+    }
+}
+```
+
+### Retrieve Organisation Pricing Data Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Squizz.Platform.API.v1;
+using Squizz.Platform.API.v1.endpoint;
+using EcommerceStandardsDocuments;
+
+namespace Squizz.Platform.API.Examples.APIv1
+{
+    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then retrieves Ecommerce data from a conencted organisation in the platform</summary>
+    public class APIv1ExampleRunnerRetrieveOrgESDDataPrice
+    {
+        public static void runAPIv1ExampleRunnerRetrieveOrgESDDataPrice()
+        {
+            Console.WriteLine("Example - Retrieve Supplier Organisation Pricing Data");
+            Console.WriteLine("");
+
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
+            Console.WriteLine("Enter Organisation ID:");
+            string orgID = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Key:");
+            string orgAPIKey = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Password:");
+            string orgAPIPass = Console.ReadLine();
+            Console.WriteLine("Enter Supplier Organisation ID:");
+            string supplierOrgID = Console.ReadLine();
+            Console.WriteLine("(Optioanally) Enter Supplier's Customer Account Code:");
+            string customerAccountCode = Console.ReadLine();
+
+            //create an API session instance
+            int sessionTimeoutMilliseconds = 20000;
+            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
+
+            //call the platform's API to request that a session is created
+            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
+
+            //check if the organisation's credentials were correct and that a session was created in the platform's API
+            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+            {
+                //session has been created so now can call other API endpoints
+                Console.WriteLine("SUCCESS - API session has successfully been created.");
+            }
+            else
+            {
+                //session failed to be created
+                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
+            }
+
+            //import organisation data if the API was successfully created
+            if (apiOrgSession.doesSessionExist())
+            {
+                //after 60 seconds give up on waiting for a response from the API when creating the notification
+                int timeoutMilliseconds = 60000;
+
+                //loop through retrieving pages of records from the API
+                bool hasMoreRecordsToRetrieve = true;
+                int recordStartIndex = 0;
+                while(hasMoreRecordsToRetrieve)
+                {
+                    //call the platform's API to get the supplier organisation's pricing data
+                    APIv1EndpointResponseESD<ESDocumentPrice> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentPrice.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST);
+                    ESDocumentPrice esDocumentPrice = (ESDocumentPrice)endpointResponseESD.esDocument;
+
+                    //check that the data successfully imported
+                    if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+                    {
+                        Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
+                        Console.WriteLine("Pricing Records Returned: " + esDocumentPrice.totalDataRecords);
+
+                        //check that records have been placed into the standards document
+                        if (esDocumentPrice.dataRecords != null) {
+                            Console.WriteLine("Product Records:");
+
+                            //iterate through each price record stored within the standards document
+                            int i = 0;
+                            foreach(ESDRecordPrice priceRecord in esDocumentPrice.dataRecords)
+                            {
+                                //output details of the product record
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+                                Console.WriteLine("  Product Record #: " + i);
+                                Console.WriteLine("  Key Product ID: " + priceRecord.keyProductID);
+                                Console.WriteLine("Key Sell Unit ID: " + priceRecord.keySellUnitID);
+                                Console.WriteLine("        Quantity: " + priceRecord.quantity);
+                                Console.WriteLine("           Price: " + priceRecord.price);
+                                if(priceRecord.taxRate != 0){
+                                    Console.WriteLine("        Tax Rate: " + priceRecord.taxRate);
+                                }
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+
+                                i++;
+                            }
+                        }
+
+                        //check to see if a full page of records were retrieved and if there is more records to get
+                        if (esDocumentPrice.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST;
+                        }else{
+                            hasMoreRecordsToRetrieve = false;
+                        }
+                    } else {
+                        Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
+                        break;
+                    }
+                }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
+            }
+        }
+    }
+}
+```
+
+### Retrieve Organisation Stock Data Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Squizz.Platform.API.v1;
+using Squizz.Platform.API.v1.endpoint;
+using EcommerceStandardsDocuments;
+
+namespace Squizz.Platform.API.Examples.APIv1
+{
+    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then retrieves Ecommerce data from a conencted organisation in the platform</summary>
+    public class APIv1ExampleRunnerRetrieveOrgESDDataProductStock
+    {
+        public static void runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock()
+        {
+            Console.WriteLine("Example - Retrieve Supplier Organisation Product Stock Data");
+            Console.WriteLine("");
+
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
+            Console.WriteLine("Enter Organisation ID:");
+            string orgID = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Key:");
+            string orgAPIKey = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Password:");
+            string orgAPIPass = Console.ReadLine();
+            Console.WriteLine("Enter Supplier Organisation ID:");
+            string supplierOrgID = Console.ReadLine();
+
+            //create an API session instance
+            int sessionTimeoutMilliseconds = 20000;
+            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
+
+            //call the platform's API to request that a session is created
+            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
+
+            //check if the organisation's credentials were correct and that a session was created in the platform's API
+            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+            {
+                //session has been created so now can call other API endpoints
+                Console.WriteLine("SUCCESS - API session has successfully been created.");
+            }
+            else
+            {
+                //session failed to be created
+                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
+            }
+
+            //import organisation data if the API was successfully created
+            if (apiOrgSession.doesSessionExist())
+            {
+                //after 60 seconds give up on waiting for a response from the API when creating the notification
+                int timeoutMilliseconds = 60000;
+
+                //loop through retrieving pages of records from the API
+                bool hasMoreRecordsToRetrieve = true;
+                int recordStartIndex = 0;
+                while(hasMoreRecordsToRetrieve)
+                {
+                    //call the platform's API to get the supplier organisation's product stock data
+                    APIv1EndpointResponseESD<ESDocumentStockQuantity> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProductStock.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
+                    ESDocumentStockQuantity esDocumentStockQuantity = (ESDocumentStockQuantity)endpointResponseESD.esDocument;
+
+                    //check that the data successfully imported
+                    if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+                    {
+                        Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
+                        Console.WriteLine("Stock Records Returned: " + esDocumentStockQuantity.totalDataRecords);
+
+                        //check that records have been placed into the standards document
+                        if (esDocumentStockQuantity.dataRecords != null) {
+                            Console.WriteLine("Stock Quantity Records:");
+
+                            //iterate through each stock quantity record stored within the standards document
+                            int i = 0;
+                            foreach(ESDRecordStockQuantity stockRecord in esDocumentStockQuantity.dataRecords)
+                            {
+                                //output details of the stock quantity record
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+                                Console.WriteLine("  Stock Record #: " + i);
+                                Console.WriteLine("  Key Product ID: " + stockRecord.keyProductID);
+                                Console.WriteLine(" Stock Available: " + stockRecord.qtyAvailable);
+                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
+
+                                i++;
+                            }
+                        }
+
+                        //check to see if a full page of records were retrieved and if there is more records to get
+                        if (esDocumentStockQuantity.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST;
+                        }else{
+                            hasMoreRecordsToRetrieve = false;
+                        }
+                    } else {
+                        Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
+                        break;
+                    }
+                }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
+            }
+        }
+    }
+}
+```
+
 ## Create Organisation Notification Endpoint
 The SQUIZZ.com platform's API has an endpoint that allows organisation notifications to be created in the platform. allowing people assigned to an organisation's notification category to receive a notification. 
 This can be used to advise such people of events happening external to the platform, such as sales, enquires, tasks completed through websites and other software.

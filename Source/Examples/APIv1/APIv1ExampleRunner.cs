@@ -30,6 +30,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                 " - Validate/Create Organisation API Sesssion",
                 " - Procure Purchase Order From Supplier",
                 " - Create Organisation Notification",
+                " - Retrieve Supplier Organisation Product Data",
+                " - Retrieve Supplier Organisation Pricing Data",
+                " - Retrieve Supplier Organisation Stock Availability Data",
                 " - Quit"
             };
 
@@ -95,6 +98,15 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 6:
                         APIv1ExampleRunnerCreateOrgNotification.runAPIv1ExampleRunnerCreateOrgNotification();
+                        break;
+                    case 7:
+                        APIv1ExampleRunnerRetrieveOrgESDDataProduct.runAPIv1ExampleRunnerRetrieveOrgESDDataProduct();
+                        break;
+                    case 8:
+                        APIv1ExampleRunnerRetrieveOrgESDDataPrice.runAPIv1ExampleRunnerRetrieveOrgESDDataPrice();
+                        break;
+                    case 9:
+                        APIv1ExampleRunnerRetrieveOrgESDDataProductStock.runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock();
                         break;
                     default:
                         continueRunning = false;
