@@ -12,6 +12,22 @@ If you are a software developer writing a .NET application then we recommend tha
 - To find more information about developing software for the SQUIZZ.com visit [https://www.squizz.com/docs/squizz/Integrate-Software-Into-SQUIZZ.com-Platform.html](https://www.squizz.com/docs/squizz/Integrate-Software-Into-SQUIZZ.com-Platform.html)
 - To find more information about the platform's API visit [https://www.squizz.com/docs/squizz/Platform-API.html](https://www.squizz.com/docs/squizz/Platform-API.html)
 
+## Contents
+
+  * [Getting Started](#getting-started)
+  * [Example Usages](#example-usages)
+    * [Create Organisation API Session Endpoint](#create-organisation-api-session-endpoint)
+	* [Send and Procure Purchase Order From Supplier Endpoint](#send-and-procure-purchase-order-from-supplier-endpoint)
+    * [Retrieve Organisation Data Endpoint](#retrieve-organisation-data-endpoint)
+		* [Retrieve Organisation Product Data Example](#retrieve-organisation-product-data-example)
+		* [Retrieve Organisation Pricing Data Example](#retrieve-organisation-pricing-data-example)
+		* [Retrieve Organisation Stock Availability Example](#retrieve-organisation-stock-availability-example)
+	* [Import Organisation Data Endpoint](#import-organisation-data-endpoint)
+    * [Create Organisation Notification Endpoint](#create-organisation-notification-endpoint)
+    * [Validate Organisation API Session Endpoint](#validate-organisation-api-session-endpoint)
+    * [Validate/Create Organisation API Session Endpoint](#validatecreate-organisation-api-session-endpoint)
+    * [Destroy Organisation API Session Endpoint](#destroy-organisation-api-session-endpoint)
+
 ## Getting Started
 
 To get started using the library within .NET applications, you can download the API library and its dependent libraries into your Visual Studio solution from [NuGET](https://www.nuget.org/) package manager. The library is hosted at [NuGet Squizz.Platform.API](https://www.nuget.org/packages/Squizz.Platform.API/) package. You can install the NuGET hosted package with the command line below, or visually find and install the package using [Visual Studio NuGET Package Manager](https://marketplace.visualstudio.com/items?itemName=NuGetTeam.NuGetPackageManager) plugin.
@@ -27,6 +43,7 @@ using Squizz.Platform.API.v1;
 using Squizz.Platform.API.v1.endpoint;
 ```
 
+## Example Usages
 ## Create Organisation API Session Endpoint
 To start using the SQUIZZ.com platform's API a session must first be created. A session can only be created after credentials for a specified organisation have been given to the API and have been verified.
 Once the session has been created then all other endpoints in the API can be called.
@@ -556,7 +573,7 @@ namespace Squizz.Platform.API.Examples.APIv1
 }
 ```
 
-### Retrieve Organisation Stock Data Example
+### Retrieve Organisation Stock Availability Example
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -656,6 +673,124 @@ namespace Squizz.Platform.API.Examples.APIv1
                         Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
                         break;
                     }
+                }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
+            }
+        }
+    }
+}
+```
+
+## Import Organisation Data Endpoint
+The SQUIZZ.com platform's API has an endpoint that allows a wide variety of different types of data to be imported into the platform against an organisation. 
+This organisational data includes taxcodes, products, customer accounts, supplier accounts. pricing, price levels, locations, and many other kinds of data.
+This data is used to allow the organisation to buy and sell products, as well manage customers, suppliers, employees, and other people.
+Each type of data needs to be imported as an "Ecommerce Standards Document" that contains one or more records. Use the Ecommerce Standards library to easily create these documents and records.
+When importing one type of organisational data, it is important to import the full data set, otherwise the platform will deactivate un-imported data.
+For example if 3 products are imported, then a another products import is run that only imports 2 records, then 1 product will become deactivated and no longer be able to be sold.
+Read [https://www.squizz.com/docs/squizz/Platform-API.html#section843](https://www.squizz.com/docs/squizz/Platform-API.html#section843) for more documentation about the endpoint and its requirements.
+See the example below on how the call the Import Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Squizz.Platform.API.v1;
+using Squizz.Platform.API.v1.endpoint;
+using EcommerceStandardsDocuments;
+
+namespace Squizz.Platform.API.Examples.APIv1
+{
+    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then imports organisation data into the platform</summary>
+    public class APIv1ExampleRunnerImportOrgESDData
+    {
+        public static void runAPIv1ExampleRunnerImportOrgESDData()
+        {
+            Console.WriteLine("Example - Import Organisation Taxcode Data");
+            Console.WriteLine("");
+
+            //obtain or load in an organisation's API credentials, in this example from the user in the console
+            Console.WriteLine("Enter Organisation ID:");
+            string orgID = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Key:");
+            string orgAPIKey = Console.ReadLine();
+            Console.WriteLine("Enter Organisation API Password:");
+            string orgAPIPass = Console.ReadLine();
+            int sessionTimeoutMilliseconds = 20000;
+
+            //create an API session instance
+            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
+
+            //call the platform's API to request that a session is created
+            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
+
+            //check if the organisation's credentials were correct and that a session was created in the platform's API
+            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
+            {
+                //session has been created so now can call other API endpoints
+                Console.WriteLine("SUCCESS - API session has successfully been created.");
+            }
+            else
+            {
+                //session failed to be created
+                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
+            }
+
+            //import organisation data if the API was successfully created
+            if (apiOrgSession.doesSessionExist())
+            {
+                //create taxcode records
+                List<ESDRecordTaxcode> taxcodeRecords = new List<ESDRecordTaxcode>();
+                ESDRecordTaxcode taxcodeRecord = new ESDRecordTaxcode();
+                taxcodeRecord.keyTaxcodeID = "1";
+                taxcodeRecord.taxcode = "GST";
+                taxcodeRecord.taxcodeLabel = "GST";
+                taxcodeRecord.description = "Goods And Services Tax";
+                taxcodeRecord.taxcodePercentageRate = 10;
+                taxcodeRecords.Add(taxcodeRecord);
+
+                taxcodeRecord = new ESDRecordTaxcode();
+                taxcodeRecord.keyTaxcodeID = "2";
+                taxcodeRecord.taxcode = "FREE";
+                taxcodeRecord.taxcodeLabel = "Tax Free";
+                taxcodeRecord.description = "Free from Any Taxes";
+                taxcodeRecord.taxcodePercentageRate = 0;
+                taxcodeRecords.Add(taxcodeRecord);
+
+                taxcodeRecord = new ESDRecordTaxcode();
+                taxcodeRecord.keyTaxcodeID = "3";
+                taxcodeRecord.taxcode = "NZGST";
+                taxcodeRecord.taxcodeLabel = "New Zealand GST Tax";
+                taxcodeRecord.description = "New Zealand Goods and Services Tax";
+                taxcodeRecord.taxcodePercentageRate = 15;
+                taxcodeRecords.Add(taxcodeRecord);
+
+                //create a hashmap containing configurations of the organisation taxcode data
+                Dictionary<string, string> configs = new Dictionary<string, string>();
+
+                //add a dataFields attribute that contains a comma delimited list of tacode record fields that the API is allowed to insert, update in the platform
+                configs.Add("dataFields", "keyTaxcodeID,taxcode,taxcodeLabel,description,taxcodePercentageRate");
+
+                //create a Ecommerce Standards Document that stores an array of taxcode records
+                ESDocumentTaxcode taxcodeESD = new ESDocumentTaxcode(ESDocumentConstants.RESULT_SUCCESS, "successfully obtained data", taxcodeRecords.ToArray(), configs);
+
+                //after 30 seconds give up on waiting for a response from the API when creating the notification
+                int timeoutMilliseconds = 30000;
+
+                //call the platform's API to import in the organisation's data
+                APIv1EndpointResponseESD<ESDocument> endpointResponseESD = APIv1EndpointOrgImportESDocument.call(apiOrgSession, timeoutMilliseconds, APIv1EndpointOrgImportESDocument.IMPORT_TYPE_ID_TAXCODES, taxcodeESD);
+
+                //check that the data successfully imported
+                if (endpointResponseESD.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS) {
+                    Console.WriteLine("SUCCESS - organisation data successfully imported into the platform");
+                } else {
+                    Console.WriteLine("FAIL - organisation data failed to be imported into the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
                 }
 
                 //next steps

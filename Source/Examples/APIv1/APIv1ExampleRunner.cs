@@ -24,15 +24,16 @@ namespace Squizz.Platform.API.Examples.APIv1
         public static void Main()
         {
             string[] menuOptions = new string[]{
-                " - Create Organisation API Sesssion",
-                " - Destroy Organisation API Sesssion",
-                " - Validate Organisation API Sesssion",
-                " - Validate/Create Organisation API Sesssion",
-                " - Procure Purchase Order From Supplier",
-                " - Create Organisation Notification",
-                " - Retrieve Supplier Organisation Product Data",
-                " - Retrieve Supplier Organisation Pricing Data",
-                " - Retrieve Supplier Organisation Stock Availability Data",
+                "  - Create Organisation API Sesssion",
+                "  - Destroy Organisation API Sesssion",
+                "  - Validate Organisation API Sesssion",
+                "  - Validate/Create Organisation API Sesssion",
+                "  - Procure Purchase Order From Supplier",
+                "  - Create Organisation Notification",
+                "  - Retrieve Supplier Organisation Product Data",
+                "  - Retrieve Supplier Organisation Pricing Data",
+                "  - Retrieve Supplier Organisation Stock Availability Data",
+                " - Import Organisation Data (Taxcodes)",
                 " - Quit"
             };
 
@@ -72,7 +73,15 @@ namespace Squizz.Platform.API.Examples.APIv1
                     Console.Write("Enter Menu Option Number: ");
                     try
                     {
-                        optionNumber = Convert.ToInt32(Console.ReadLine());
+                        //get the option that the user entered
+                        string optionEntered = Console.ReadLine().Trim();
+
+                        //if the user hit the q key then quit the application
+                        if(optionEntered.ToLower() == "q"){
+                            return;
+                        }
+                        
+                        optionNumber = Convert.ToInt32(optionEntered);
                         optionSelected = (optionNumber >= 1 && optionNumber <= menuOptions.Length);
                     }
                     catch(Exception ex){}
@@ -107,6 +116,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 9:
                         APIv1ExampleRunnerRetrieveOrgESDDataProductStock.runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock();
+                        break;
+                    case 10:
+                        APIv1ExampleRunnerImportOrgESDData.runAPIv1ExampleRunnerImportOrgESDData();
                         break;
                     default:
                         continueRunning = false;
