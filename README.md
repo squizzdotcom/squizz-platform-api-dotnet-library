@@ -32,7 +32,7 @@ If you are a software developer writing a .NET application then we recommend tha
 
 To get started using the library within .NET applications, you can download the API library and its dependent libraries into your Visual Studio solution from [NuGET](https://www.nuget.org/) package manager. The library is hosted at [NuGet Squizz.Platform.API](https://www.nuget.org/packages/Squizz.Platform.API/) package. You can install the NuGET hosted package with the command line below, or visually find and install the package using [Visual Studio NuGET Package Manager](https://marketplace.visualstudio.com/items?itemName=NuGetTeam.NuGetPackageManager) plugin.
 ```
-Install-Package Squizz.Platform.API -Version 1.0.0
+Install-Package Squizz.Platform.API -Version 1.0.1
 ```
 Alternatively you can download and add the required files direct from the [Release page](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/releases). Once done then add references to the DLL files in your visual studio solution.
 The library contains dependencies on [Newtonsoft's Json.NET Library](https://www.newtonsoft.com/json) as well as the [Ecommerce Standards Documents .NET Library](https://github.com/squizzdotcom/ecommerce-standards-documents-dotnet-library)
