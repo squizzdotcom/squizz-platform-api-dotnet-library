@@ -295,6 +295,15 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to one or more of a supplier&apos;s products being out of stock and unable to be ordered..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_MAPPED_PRODUCT_STOCK_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_MAPPED_PRODUCT_STOCK_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to find a matching product in the supplier&apos;s organisation..
         /// </summary>
         internal static string SERVER_ERROR_ORDER_PRODUCT_NOT_MAPPED {

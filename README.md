@@ -151,7 +151,9 @@ namespace Squizz.Platform.API.Examples.APIv1
             string orgAPIPass = Console.ReadLine();
             Console.WriteLine("Enter Supplier Organisation ID:");
             string supplierOrgID = Console.ReadLine();
-            
+            Console.WriteLine("(optional) Enter Supplier's Customer Account Code:");
+            string customerAccountCode = Console.ReadLine();
+
             //create an API session instance
             int sessionTimeoutMilliseconds = 20000;
             APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
@@ -180,6 +182,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 //set data within the purchase order
                 purchaseOrderRecord.keyPurchaseOrderID = "111";
                 purchaseOrderRecord.purchaseOrderCode = "POEXAMPLE-345";
+                purchaseOrderRecord.purchaseOrderNumber = "345";
                 purchaseOrderRecord.purchaseOrderNumber = "345";
                 purchaseOrderRecord.instructions = "Leave goods at the back entrance";
                 purchaseOrderRecord.keySupplierAccountID = "2";
@@ -223,24 +226,20 @@ namespace Squizz.Platform.API.Examples.APIv1
                 orderProduct.priceTotalIncTax = (decimal)22.00;
                 orderProduct.priceTotalExTax = (decimal)20.00;
                 orderProduct.priceTotalTax = (decimal)2.00;
-                //specify supplier's product code in salesOrderProductCode if it is different to the customer line's productCode field
-                orderProduct.salesOrderProductCode = "ACME-TTGREEN";
+                //specify supplier's product code in salesOrderProductCode if it is different to the line's productCode field
+                orderProduct.salesOrderProductCode = "ACME-SUPPLIER-TTGREEN";
 
-                //add 1st order line to the order lines list
+                //add 1st order line to lines list
                 orderLines.Add(orderProduct);
 
                 //create purchase order line record 2
                 orderProduct = new ESDRecordOrderPurchaseLine();
                 orderProduct.lineType = ESDocumentConstants.ORDER_LINE_TYPE_PRODUCT;
                 orderProduct.productCode = "TEA-TOWEL-BLUE";
-                orderProduct.productName = "Blue tea towel - 20 x 6 centimetres";
-                orderProduct.keySellUnitID = "1";
-                orderProduct.unitName = "EACH";
                 orderProduct.quantity = 10;
-                orderProduct.sellUnitBaseQuantity = 10;
                 orderProduct.salesOrderProductCode = "ACME-TTBLUE";
 
-                //add 2nd order line to the order lines list
+                //add 2nd order line to lines list
                 orderLines.Add(orderProduct);
 
                 //add order lines to the order
@@ -250,21 +249,21 @@ namespace Squizz.Platform.API.Examples.APIv1
                 List<ESDRecordOrderPurchase> purchaseOrderRecords = new List<ESDRecordOrderPurchase>();
                 purchaseOrderRecords.Add(purchaseOrderRecord);
 
-                //after 60 seconds give up on waiting for a response from the API when sending the order
+                //after 60 seconds give up on waiting for a response from the API when creating the notification
                 int timeoutMilliseconds = 60000;
 
                 //create purchase order Ecommerce Standards document and add purchse order records to the document
                 ESDocumentOrderPurchase orderPurchaseESD = new ESDocumentOrderPurchase(ESDocumentConstants.RESULT_SUCCESS, "successfully obtained data", purchaseOrderRecords.ToArray(), new Dictionary<string, string>());
 
                 //send purchase order document to the API for procurement by the supplier organisation
-                APIv1EndpointResponseESD<ESDocumentOrderSale> endpointResponseESD = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, "", orderPurchaseESD);
+                APIv1EndpointResponseESD<ESDocumentOrderSale> endpointResponseESD = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, orderPurchaseESD);
                 ESDocumentOrderSale esDocumentOrderSale = endpointResponseESD.esDocument;
 
                 //check the result of procuring the purchase orders
                 if (endpointResponseESD.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS) {
                     Console.WriteLine("SUCCESS - organisation purchase orders have successfully been sent to supplier organisation.");
 
-                    //iterate through each of the returned supplier's sales orders and output the details of the sales orders
+                    //iterate through each of the returned sales orders and output the details of the sales orders
                     if (esDocumentOrderSale.dataRecords != null) {
                         foreach(ESDRecordOrderSale salesOrderRecord in esDocumentOrderSale.dataRecords) {
                             Console.WriteLine("\nSales Order Returned, Order Details: ");
@@ -278,37 +277,62 @@ namespace Squizz.Platform.API.Examples.APIv1
                 } else {
                     Console.WriteLine("FAIL - organisation purchase orders failed to be processed. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
 
-                    //if one or more products in the purchase order could not match a product for the supplier organisation then find out the order lines caused the problem
-                    if (endpointResponseESD.result_code.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_CODE_ERROR_ORDER_PRODUCT_NOT_MAPPED && esDocumentOrderSale != null)
+                    //check that a Ecommerce standards document was returned
+                    if (esDocumentOrderSale != null && esDocumentOrderSale.configs != null)
                     {
-                        //get a list of order lines that could not be mapped
-                        List<KeyValuePair<int, int>> unmappedLines = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.getUnmappedOrderLines(esDocumentOrderSale);
+                        //if one or more products in the purchase order could not match a product for the supplier organisation then find out the order lines caused the problem
+                        if (esDocumentOrderSale.configs.ContainsKey(APIv1EndpointResponseESD<ESDocumentOrderSale>.ESD_CONFIG_ORDERS_WITH_UNMAPPED_LINES))
+                        {
+                            //get a list of order lines that could not be mapped
+                            List<KeyValuePair<int, int>> unmappedLines = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.getUnmappedOrderLines(esDocumentOrderSale);
 
-                        //iterate through each unmapped order line
-                        foreach(KeyValuePair<int, int> unmappedLine in unmappedLines){
-                            //get the index of the purchase order and line that contained the unmapped product
-                            int orderIndex = unmappedLine.Key;
-                            int lineIndex = unmappedLine.Value;
+                            //iterate through each unmapped order line
+                            foreach (KeyValuePair<int, int> unmappedLine in unmappedLines)
+                            {
+                                //get the index of the purchase order and line that contained the unmapped product
+                                int orderIndex = unmappedLine.Key;
+                                int lineIndex = unmappedLine.Value;
 
-                            //check that the order can be found that contains the problematic line
-                            if (orderIndex < orderPurchaseESD.dataRecords.Length && lineIndex < orderPurchaseESD.dataRecords[orderIndex].lines.Count) {
-                                Console.WriteLine("For purchase order: " + orderPurchaseESD.dataRecords[orderIndex].purchaseOrderCode + " a matching supplier product for line number: " + (lineIndex + 1) + " could not be found.");
+                                //check that the order can be found that contains the problematic line
+                                if (orderIndex < orderPurchaseESD.dataRecords.Length && lineIndex < orderPurchaseESD.dataRecords[orderIndex].lines.Count)
+                                {
+                                    Console.WriteLine("For purchase order: " + orderPurchaseESD.dataRecords[orderIndex].purchaseOrderCode + " a matching supplier product for line number: " + (lineIndex + 1) + " could not be found.");
+                                }
                             }
                         }
-                    }
-                    //if one or more products in the purchase order could not be priced by the supplier organisation then find the order line that caused the problem
-                    else if (endpointResponseESD.result_code.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_CODE_ERROR_ORDER_MAPPED_PRODUCT_PRICE_NOT_FOUND && esDocumentOrderSale != null)
-                    {
+
+                        //if one or more supplier organisation's products in the purchase order are not stock then find the order lines that caused the problem
+                        if (esDocumentOrderSale.configs.ContainsKey(APIv1EndpointResponseESD<ESDocumentOrderSale>.ESD_CONFIG_ORDERS_WITH_UNSTOCKED_LINES))
+                        {
+                            //get a list of order lines that are not stocked by the supplier
+                            List<KeyValuePair<int, int>> unstockedLines = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.getOutOfStockOrderLines(esDocumentOrderSale);
+
+                            //iterate through each unstocked order line
+                            foreach (KeyValuePair<int, int> unstockedLine in unstockedLines)
+                            {
+                                //get the index of the purchase order and line that contained the unstocked product
+                                int orderIndex = unstockedLine.Key;
+                                int lineIndex = unstockedLine.Value;
+
+                                //check that the order can be found that contains the problematic line
+                                if (orderIndex < orderPurchaseESD.dataRecords.Length && lineIndex < orderPurchaseESD.dataRecords[orderIndex].lines.Count)
+                                {
+                                    Console.WriteLine("For purchase order: " + orderPurchaseESD.dataRecords[orderIndex].purchaseOrderCode + " the supplier has no products in stock for line number: " + (lineIndex + 1));
+                                }
+                            }
+                        }
+
+                        //if one or more products in the purchase order could not be priced by the supplier organisation then find the order line that caused the problem
                         if (esDocumentOrderSale.configs.ContainsKey(APIv1EndpointResponseESD<ESDocumentOrderSale>.ESD_CONFIG_ORDERS_WITH_UNPRICED_LINES))
                         {
                             //get a list of order lines that could not be priced
-                            List<KeyValuePair<int, int>> unmappedLines = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.getUnpricedOrderLines(esDocumentOrderSale);
+                            List<KeyValuePair<int, int>> unpricedLines = APIv1EndpointOrgProcurePurchaseOrderFromSupplier.getUnpricedOrderLines(esDocumentOrderSale);
 
                             //iterate through each unpriced order line
-                            foreach(KeyValuePair<int, int> unmappedLine in unmappedLines){
+                            foreach (KeyValuePair<int, int> unpricedLine in unpricedLines) {
                                 //get the index of the purchase order and line that contained the unpriced product
-                                int orderIndex = unmappedLine.Key;
-                                int lineIndex = unmappedLine.Value;
+                                int orderIndex = unpricedLine.Key;
+                                int lineIndex = unpricedLine.Value;
 
                                 //check that the order can be found that contains the problematic line
                                 if (orderIndex < orderPurchaseESD.dataRecords.Length && lineIndex < orderPurchaseESD.dataRecords[orderIndex].lines.Count) {
@@ -318,12 +342,13 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
                     }
                 }
+
+                //next steps
+                //call other API endpoints...
+                //destroy API session when done...
+                apiOrgSession.destroyOrgSession();
             }
-
-            //next steps
-            //call other API endpoints...
-            //destroy API session when done...
-
+            
             Console.WriteLine("Example Finished.");
         }
     }

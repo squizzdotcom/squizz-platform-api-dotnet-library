@@ -165,5 +165,49 @@ namespace Squizz.Platform.API.v1.endpoint
         
             return unpricedOrderLines;
         }
+
+        /// <summary>gets a list of order indexes that contain order lines that are out of stock for the supplier organisation's products</summary>
+        /// <param name="esDocument">Ecommerce standards document containing configuration that specifies out of stock order lines</param>
+        /// <returns>array containing pairs. Each pair has the index of the order, and the index of the order line that could not be stocked</returns>
+        public static List<KeyValuePair<int, int>> getOutOfStockOrderLines(ESDocument esDocument)
+        {
+            List<KeyValuePair<int, int>> unstockedOrderLines = new List<KeyValuePair<int, int>>();
+
+            //check that the ecommerce standards document's configs contains a key specifying the out of stock order lines
+            if (esDocument.configs.ContainsKey(APIv1EndpointResponseESD<ESDocumentOrderSale>.ESD_CONFIG_ORDERS_WITH_UNSTOCKED_LINES))
+            {
+                //get comma separated list of order record indicies and line indicies that indicate the out ofstock order lines
+                String unstockedOrderLineCSV = esDocument.configs[APIv1EndpointResponseESD<ESDocumentOrderSale>.ESD_CONFIG_ORDERS_WITH_UNSTOCKED_LINES];
+
+                //get the index of the order record and line that contained the out of stock product
+                if (!String.IsNullOrWhiteSpace(unstockedOrderLineCSV.Trim()))
+                {
+                    String[] unstockedOrderLineIndices = unstockedOrderLineCSV.Trim().Split(',');
+
+                    //iterate through each order-line index
+                    for (int i = 0; i < unstockedOrderLineIndices.Length; i++)
+                    {
+                        //get order index and line index
+                        String[] orderLineIndex = unstockedOrderLineIndices[i].Split(':');
+                        if (orderLineIndex.Length == 2)
+                        {
+                            try
+                            {
+                                int orderIndex = Convert.ToInt32(orderLineIndex[0]);
+                                int lineIndex = Convert.ToInt32(orderLineIndex[1]);
+                                KeyValuePair<int, int> orderLinePair = new KeyValuePair<int, int>(orderIndex, lineIndex);
+                                unstockedOrderLines.Add(orderLinePair);
+
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                        }
+                    }
+                }
+            }
+
+            return unstockedOrderLines;
+        }
     }
 }
