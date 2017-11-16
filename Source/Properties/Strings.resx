@@ -168,6 +168,9 @@
   <data name="SERVER_ERROR_INCORRECT_DATA_TYPE" xml:space="preserve">
     <value>An error occurred when calling SQUIZZ.com's API due to the data type specified not being supported or of the correct type.</value>
   </data>
+  <data name="SERVER_ERROR_INCORRECT_RECORD_TYPE" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API, due to the wrong type of record being given.</value>
+  </data>
   <data name="SERVER_ERROR_INSUFFICIENT_CREDIT" xml:space="preserve">
     <value>An error occurred when calling SQUIZZ.com's API due to the organisation having insufficient trading tokens in the platform to process the request.</value>
   </data>
@@ -182,6 +185,12 @@
   </data>
   <data name="SERVER_ERROR_MALFORMED_URL" xml:space="preserve">
     <value>An error occurred when calling SQUIZZ.com's API due to URL being not correctly set.</value>
+  </data>
+  <data name="SERVER_ERROR_MAX_SEARCHES_REACHED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API, due to the maximum number of searches allowed being reached within the allowed time frame. Wait a short period of time before trying to perform another search.</value>
+  </data>
+  <data name="SERVER_ERROR_NO_DATA_RETURNED" xml:space="preserve">
+    <value>An error occurred when calling SQUIZZ.com's API, due to the platform unable to receive any data from the connected business system.</value>
   </data>
   <data name="SERVER_ERROR_NO_ORG_CUSTOMER_ACCOUNT_ASSIGNED" xml:space="preserve">
     <value>An error occurred when calling SQUIZZ.com's API due to no customer account in the supplier's organisation able to be found with the given account code.</value>

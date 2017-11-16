@@ -214,6 +214,15 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API, due to the wrong type of record being given..
+        /// </summary>
+        internal static string SERVER_ERROR_INCORRECT_RECORD_TYPE {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_INCORRECT_RECORD_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to the organisation having insufficient trading tokens in the platform to process the request..
         /// </summary>
         internal static string SERVER_ERROR_INSUFFICIENT_CREDIT {
@@ -255,6 +264,24 @@ namespace Squizz.Platform.API.Properties {
         internal static string SERVER_ERROR_MALFORMED_URL {
             get {
                 return ResourceManager.GetString("SERVER_ERROR_MALFORMED_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API, due to the maximum number of searches allowed being reached within the allowed time frame. Wait a short period of time before trying to perform another search..
+        /// </summary>
+        internal static string SERVER_ERROR_MAX_SEARCHES_REACHED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_MAX_SEARCHES_REACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API, due to the platform unable to receive any data from the connected business system..
+        /// </summary>
+        internal static string SERVER_ERROR_NO_DATA_RETURNED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_NO_DATA_RETURNED", resourceCulture);
             }
         }
         
