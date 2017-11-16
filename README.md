@@ -415,7 +415,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
             }
 
-            //import organisation data if the API was successfully created
+            //retrieve organisation data if the API was successfully created
             if (apiOrgSession.doesSessionExist())
             {
                 //after 60 seconds give up on waiting for a response from the API when creating the notification
@@ -430,7 +430,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                     APIv1EndpointResponseESD<ESDocumentProduct> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProduct.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
                     ESDocumentProduct esDocumentProduct = (ESDocumentProduct)endpointResponseESD.esDocument;
 
-                    //check that the data successfully imported
+                    //check that the data successfully retrieved
                     if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
                     {
                         Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
@@ -533,7 +533,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
             }
 
-            //import organisation data if the API was successfully created
+            //retrieve organisation data if the API was successfully created
             if (apiOrgSession.doesSessionExist())
             {
                 //after 60 seconds give up on waiting for a response from the API when creating the notification
@@ -548,7 +548,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                     APIv1EndpointResponseESD<ESDocumentPrice> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentPrice.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST);
                     ESDocumentPrice esDocumentPrice = (ESDocumentPrice)endpointResponseESD.esDocument;
 
-                    //check that the data successfully imported
+                    //check that the data successfully retrieved
                     if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
                     {
                         Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
@@ -650,7 +650,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
             }
 
-            //import organisation data if the API was successfully created
+            //retrieve organisation data if the API was successfully created
             if (apiOrgSession.doesSessionExist())
             {
                 //after 60 seconds give up on waiting for a response from the API when creating the notification
@@ -665,7 +665,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                     APIv1EndpointResponseESD<ESDocumentStockQuantity> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProductStock.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
                     ESDocumentStockQuantity esDocumentStockQuantity = (ESDocumentStockQuantity)endpointResponseESD.esDocument;
 
-                    //check that the data successfully imported
+                    //check that the data successfully retrieved
                     if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
                     {
                         Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
@@ -684,6 +684,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                                 Console.WriteLine("  Stock Record #: " + i);
                                 Console.WriteLine("  Key Product ID: " + stockRecord.keyProductID);
                                 Console.WriteLine(" Stock Available: " + stockRecord.qtyAvailable);
+								Console.WriteLine(" Stock Orderable: " + stockRecord.qtyOrderable);
                                 Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
 
                                 i++;
