@@ -67,7 +67,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                     APIv1EndpointResponseESD<ESDocumentProduct> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProduct.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
                     ESDocumentProduct esDocumentProduct = (ESDocumentProduct)endpointResponseESD.esDocument;
 
-                    //check that the data successfully imported
+                    //check that the data successfully retrieved
                     if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
                     {
                         Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
