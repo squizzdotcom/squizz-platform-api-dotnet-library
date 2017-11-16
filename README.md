@@ -833,8 +833,9 @@ namespace Squizz.Platform.API.Examples.APIv1
 
 ### Search Customer Account Records Endpoint
 The SQUIZZ.com platform's API has an endpoint that allows an organisation to search for records within another connected organisation's business sytem, based on records associated to an assigned customer account.
-This endpoint allows an organisation to securely search for invoice, sales order, back order, transactions. credit and payment records, retrieved in realtime from a supplier organisation's connected business system.
-The records returned from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with each document containing an array of zero or more records. Use the Ecommerce Standards library to easily read through these documents and records, to find data natively using Java classes.
+This endpoint allows an organisation to securely search for invoice, sales order, back order, transactions. credit and payment records, retrieved in realtime from a supplier organisation's connected business system. 
+The endpoint also makes it easier to search for records across multiple suppliers and systems, without having to do complete one-on-one integrations.
+The records returned from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with each document containing an array of zero or more records. Use the Ecommerce Standards library to easily read through these documents and records, to find data natively using .NET classes.
 Read [https://www.squizz.com/docs/squizz/Platform-API.html#section1035](https://www.squizz.com/docs/squizz/Platform-API.html#section1035) for more documentation about the endpoint and its requirements.
 See the example below on how the call the Search Customer Account Records endpoint. Note that a session must first be created in the API before calling the endpoint.
 
@@ -1170,7 +1171,8 @@ namespace Squizz.Platform.API.Examples.APIv1
 ### Retrieve Customer Account Record Endpoint
 The SQUIZZ.com platform's API has an endpoint that allows an organisation to retrieve the details and lines for a record from a supplier organisation's connected business sytem, based on a record associated to an assigned customer account.
 This endpoint allows an organisation to securely get the details for a invoice, sales order, back order, credit or payment record, retrieved in realtime from a supplier organisation's connected business system.
-The record returned from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with the document containing an array of zero or one records. Use the Ecommerce Standards library to easily read through the documents and records, to find data natively using Java classes.
+The endpoint also makes it easier to retrieve the details of records across multiple suppliers and systems, without having to do complete one-on-one integrations.
+The record returned from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with the document containing an array of zero or one records. Use the Ecommerce Standards library to easily read through the documents and records, to find data natively using .NET classes.
 Read [https://www.squizz.com/docs/squizz/Platform-API.html#section1036](https://www.squizz.com/docs/squizz/Platform-API.html#section1036) for more documentation about the endpoint and its requirements.
 See the example below on how the call the Retrieve Customer Account Records endpoint. Note that a session must first be created in the API before calling the endpoint.
 
