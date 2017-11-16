@@ -51,6 +51,12 @@ namespace Squizz.Platform.API.v1
         /// <summary>name of the platform's API endpoint to call to get organisation data returned in an Ecommerce Standards Document from a connected organisation</summary>
         public const string API_ORG_ENDPOINT_RETRIEVE_ESD = "retrieve_esd";
 
+        /// <summary>name of the platform's API endpoint to call to search an organisation's customer account record data, returned in an Ecommerce Standards Document from a connected organisation</summary>
+        public const string API_ORG_ENDPOINT_SEARCH_CUSTOMER_ACCOUNT_RECORDS_ESD = "search_customer_account_records_esd";
+
+        /// <summary>name of the platform's API endpoint to call to retrieve data of a single record associated to an organisation's customer account record, returned in an Ecommerce Standards Document from a connected organisation</summary>
+        public const string API_ORG_ENDPOINT_RETRIEVE_CUSTOMER_ACCOUNT_RECORD_ESD = "retrieve_customer_account_record_esd";
+
         /// <summary>name of the endpoint attribute in the API endpoint response that contains the result code</summary>
         public const string API_ORG_ENDPOINT_ATTRIBUTE_RESULT_CODE = "result_code";
 

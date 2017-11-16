@@ -34,6 +34,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                 "  - Retrieve Supplier Organisation Pricing Data",
                 "  - Retrieve Supplier Organisation Stock Availability Data",
                 " - Import Organisation Data (Taxcodes)",
+                " - Search Supplier Organisation Customer Account Records",
+                " - Retrieve Supplier Organisation Customer Account Record",
+                " - Search and Retrieve Supplier Organisation Invoice Records For Purchase Order",
                 " - Quit"
             };
 
@@ -119,6 +122,15 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 10:
                         APIv1ExampleRunnerImportOrgESDData.runAPIv1ExampleRunnerImportOrgESDData();
+                        break;
+                    case 11:
+                        APIv1ExampleRunnerSearchCustomerAccountRecords.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
+                        break;
+                    case 12:
+                        APIv1ExampleRunnerRetrieveCustomerAccountRecord.runAPIv1ExampleRunnerRetrieveCustomerAccountRecord();
+                        break;
+                    case 13:
+                        APIv1ExampleRunnerSearchRetrieveSupplierInvoiceRecordsForPurchaseOrder.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
                         break;
                     default:
                         continueRunning = false;
