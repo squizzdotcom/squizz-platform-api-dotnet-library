@@ -115,7 +115,13 @@ namespace Squizz.Platform.API.Examples.APIv1
                 //add 1st order line to lines list
                 orderLines.Add(orderProduct);
 
-                //create purchase order line record 2
+                //add a 2nd purchase order line record that is a text line
+                orderProduct = new ESDRecordOrderPurchaseLine();
+                orderProduct.lineType = ESDocumentConstants.ORDER_LINE_TYPE_TEXT;
+                orderProduct.textDescription = "Please bundle tea towels into a box";
+                orderLines.Add(orderProduct);
+
+                //add a 3rd purchase order line product record to the order
                 orderProduct = new ESDRecordOrderPurchaseLine();
                 orderProduct.lineType = ESDocumentConstants.ORDER_LINE_TYPE_PRODUCT;
                 orderProduct.productCode = "TEA-TOWEL-BLUE";
