@@ -23,8 +23,8 @@ If you are a software developer writing a .NET application then we recommend tha
 		* [Retrieve Organisation Pricing Data Example](#retrieve-organisation-pricing-data-example)
 		* [Retrieve Organisation Stock Availability Example](#retrieve-organisation-stock-availability-example)
 	* [Import Organisation Data Endpoint](#import-organisation-data-endpoint)
-	* [Retrieve Organisation Data Endpoint](#retrieve-organisation-data-endpoint)
     * [Search Customer Account Records Endpoint](#search-customer-account-records-endpoint)
+	* [Retrieve Customer Account Record Endpoint](#retrieve-customer-account-record-endpoint)
     * [Create Organisation Notification Endpoint](#create-organisation-notification-endpoint)
     * [Validate Organisation API Session Endpoint](#validate-organisation-api-session-endpoint)
     * [Validate/Create Organisation API Session Endpoint](#validatecreate-organisation-api-session-endpoint)
@@ -838,6 +838,8 @@ The records returned from endpoint is formatted as JSON data conforming to the "
 Read [https://www.squizz.com/docs/squizz/Platform-API.html#section1035](https://www.squizz.com/docs/squizz/Platform-API.html#section1035) for more documentation about the endpoint and its requirements.
 See the example below on how the call the Search Customer Account Records endpoint. Note that a session must first be created in the API before calling the endpoint.
 
+![alt tag](https://attach.squizz.com/doc_centre/1/files/images/masters/SQUIZZ-Customer-Account-Record-Search[127].png)
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -1171,6 +1173,8 @@ This endpoint allows an organisation to securely get the details for a invoice, 
 The record returned from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with the document containing an array of zero or one records. Use the Ecommerce Standards library to easily read through the documents and records, to find data natively using Java classes.
 Read [https://www.squizz.com/docs/squizz/Platform-API.html#section1036](https://www.squizz.com/docs/squizz/Platform-API.html#section1036) for more documentation about the endpoint and its requirements.
 See the example below on how the call the Retrieve Customer Account Records endpoint. Note that a session must first be created in the API before calling the endpoint.
+
+![alt tag](https://attach.squizz.com/doc_centre/1/files/images/masters/SQUIZZ-Customer-Account-Record-Search[127].png)
 
 ```csharp
 using System;
