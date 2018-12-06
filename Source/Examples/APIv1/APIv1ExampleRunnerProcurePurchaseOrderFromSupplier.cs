@@ -66,7 +66,6 @@ namespace Squizz.Platform.API.Examples.APIv1
                 purchaseOrderRecord.keyPurchaseOrderID = "111";
                 purchaseOrderRecord.purchaseOrderCode = "POEXAMPLE-345";
                 purchaseOrderRecord.purchaseOrderNumber = "345";
-                purchaseOrderRecord.purchaseOrderNumber = "345";
                 purchaseOrderRecord.instructions = "Leave goods at the back entrance";
                 purchaseOrderRecord.keySupplierAccountID = "2";
                 purchaseOrderRecord.supplierAccountCode = "ACM-002";
@@ -127,8 +126,6 @@ namespace Squizz.Platform.API.Examples.APIv1
                 orderProduct.productCode = "TEA-TOWEL-BLUE";
                 orderProduct.quantity = 10;
                 orderProduct.salesOrderProductCode = "ACME-TTBLUE";
-
-                //add 2nd order line to lines list
                 orderLines.Add(orderProduct);
 
                 //add order lines to the order

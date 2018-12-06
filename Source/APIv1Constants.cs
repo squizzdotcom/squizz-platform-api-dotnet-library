@@ -57,6 +57,9 @@ namespace Squizz.Platform.API.v1
         /// <summary>name of the platform's API endpoint to call to retrieve data of a single record associated to an organisation's customer account record, returned in an Ecommerce Standards Document from a connected organisation</summary>
         public const string API_ORG_ENDPOINT_RETRIEVE_CUSTOMER_ACCOUNT_RECORD_ESD = "retrieve_customer_account_record_esd";
 
+        /// <summary>name of the platform's API endpoint to call to send a customer invoice from a supplier organisation to a customer organisation</summary>
+        public const string API_ORG_ENDPOINT_SEND_CUSTOMER_INVOICE_TO_CUSTOMER = "send_customer_invoice_to_customer";
+
         /// <summary>name of the endpoint attribute in the API endpoint response that contains the result code</summary>
         public const string API_ORG_ENDPOINT_ATTRIBUTE_RESULT_CODE = "result_code";
 

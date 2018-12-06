@@ -53,8 +53,8 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EcommerceStandardsDocuments.Library, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\EcommerceStandardsDocuments.Library.1.2.0.0\lib\net40\EcommerceStandardsDocuments.Library.dll</HintPath>
+    <Reference Include="EcommerceStandardsDocuments.Library, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\EcommerceStandardsDocuments.Library.1.3.0.0\lib\net40\EcommerceStandardsDocuments.Library.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -84,6 +84,7 @@
     <Compile Include="endpoint\APIv1EndpointOrgRetrieveESDocumentProduct.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgRetrieveESDocumentProductStock.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgSearchCustomerAccountRecords.cs" />
+    <Compile Include="endpoint\APIv1EndpointOrgSendCustomerInvoiceToCustomer.cs" />
     <Compile Include="endpoint\APIv1EndpointResponse.cs" />
     <Compile Include="endpoint\APIv1EndpointResponseESD.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunner.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerRetrieveOrgESDDataProductStock.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerSearchCustomerAccountRecords.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerSearchRetrieveSupplierInvoiceRecordsForPurchaseOrder.cs" />
+    <Compile Include="Examples\APIv1\APIv1ExampleRunnerSendCustomerInvoiceToCustomer.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerValidateCreateOrgSession.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerValidateOrgSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,8 +11,8 @@
     <iconUrl>https://www.squizz.com/ui/resources/images/icons/squizz_icon_32.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Release of version 1.2 of the Squizz.com API library. Documentation of the library can be found at https://github.com/squizzdotcom/squizz-platform-api-dotnet-library</releaseNotes>
-    <copyright>Copyright Squizz Pty Ltd 2018</copyright>
+    <releaseNotes>Release of version 1.3 of the Squizz.com API library. Documentation of the library can be found at https://github.com/squizzdotcom/squizz-platform-api-dotnet-library</releaseNotes>
+    <copyright>Copyright Squizz Pty Ltd 2019</copyright>
     <tags>Platform API Library Ecommerce Electronic Data Interchange EDI Online Ordering Trading Transfer Squizz Integrated Ecommerce</tags>
   </metadata>
 </package>

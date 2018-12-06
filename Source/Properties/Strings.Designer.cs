@@ -250,6 +250,42 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to a line within the invoice not able to be matched up to one of the customer&apos;s products, labour, or downloads..
+        /// </summary>
+        internal static string SERVER_ERROR_INVOICE_LINE_NOT_MAPPED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_INVOICE_LINE_NOT_MAPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to a line&apos;s taxcode within the invoice not able to be matched up to one of the customer&apos;s taxcodes..
+        /// </summary>
+        internal static string SERVER_ERROR_INVOICE_LINE_TAXCODE_NOT_MAPPED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_INVOICE_LINE_TAXCODE_NOT_MAPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to a surcharge within the invoice not able to the matched up to one of the customer&apos;s surcharges..
+        /// </summary>
+        internal static string SERVER_ERROR_INVOICE_SURCHARGE_NOT_MAPPED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_INVOICE_SURCHARGE_NOT_MAPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to a surcharge&apos;s taxcode within the invoice not able to be matched up to one of the customer&apos;s taxcodes..
+        /// </summary>
+        internal static string SERVER_ERROR_INVOICE_SURCHARGE_TAXCODE_NOT_MAPPED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_INVOICE_SURCHARGE_TAXCODE_NOT_MAPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to an IO (Reading or Writing) error..
         /// </summary>
         internal static string SERVER_ERROR_IO {
@@ -309,6 +345,24 @@ namespace Squizz.Platform.API.Properties {
         internal static string SERVER_ERROR_NO_ORG_PEOPLE_TO_NOTIFY {
             get {
                 return ResourceManager.GetString("SERVER_ERROR_NO_ORG_PEOPLE_TO_NOTIFY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to no supplier account in the customer&apos;s organisation able to be found with the given account code..
+        /// </summary>
+        internal static string SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_ASSIGNED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_ASSIGNED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to the customer organisation having no active supplier accounts assigned to the supplier organistion..
+        /// </summary>
+        internal static string SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_SET {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_SET", resourceCulture);
             }
         }
         
