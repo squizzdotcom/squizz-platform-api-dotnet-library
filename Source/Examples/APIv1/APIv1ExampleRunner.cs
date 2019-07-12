@@ -1,5 +1,5 @@
 ﻿/**
-* Copyright (C) 2017 Squizz PTY LTD
+* Copyright (C) 2019 Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -33,12 +33,22 @@ namespace Squizz.Platform.API.Examples.APIv1
                 "  - Retrieve Supplier Organisation Product Data",
                 "  - Retrieve Supplier Organisation Pricing Data",
                 "  - Retrieve Supplier Organisation Stock Availability Data",
-                " - Import Organisation Data (Taxcodes)",
+                " - Import Organisation Data",
                 " - Search Supplier Organisation Customer Account Records",
                 " - Retrieve Supplier Organisation Customer Account Record",
                 " - Search and Retrieve Supplier Organisation Invoice Records For Purchase Order",
                 " - Send Customer Invoice To Customer",
                 " - Quit"
+            };
+
+            string[] dataImportMenuOptions = new string[]{
+                "  - Import Attributes",
+                "  - Import Categories",
+                "  - Import Makers",
+                "  - Import Maker Models",
+                "  - Import Maker Model Mappings",
+                "  - Import Products",
+                "  - Import Taxcodes"
             };
 
             Console.WriteLine(CONSOLE_LINE);
@@ -122,7 +132,67 @@ namespace Squizz.Platform.API.Examples.APIv1
                         APIv1ExampleRunnerRetrieveOrgESDDataProductStock.runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock();
                         break;
                     case 10:
-                        APIv1ExampleRunnerImportOrgESDData.runAPIv1ExampleRunnerImportOrgESDData();
+
+                        Console.WriteLine(CONSOLE_LINE);
+                        Console.WriteLine("Select from one of the data imports to run: ");
+                        Console.WriteLine(CONSOLE_LINE);
+
+                        //display menu options
+                        for (int i = 0; i < dataImportMenuOptions.Length; i++)
+                        {
+                            Console.WriteLine((i + 1).ToString() + dataImportMenuOptions[i]);
+                        }
+
+                        bool dataImportOptionSelected = false;
+                        int dataImportOptionNumber = dataImportMenuOptions.Length;
+
+                        //get the selected option
+                        while (!dataImportOptionSelected)
+                        {
+                            Console.Write("Enter Menu Option Number: ");
+                            try
+                            {
+                                //get the option that the user entered
+                                string optionEntered = Console.ReadLine().Trim();
+
+                                //if the user hit the q key then quit the application
+                                if (optionEntered.ToLower() == "q")
+                                {
+                                    return;
+                                }
+
+                                dataImportOptionNumber = Convert.ToInt32(optionEntered);
+                                dataImportOptionSelected = (dataImportOptionNumber >= 1 && dataImportOptionNumber <= dataImportMenuOptions.Length);
+                            }
+                            catch (Exception ex) { }
+                        }
+
+                        //run the selected example
+                        switch (dataImportOptionNumber)
+                        {
+                            case 1:
+                                APIv1ExampleRunnerImportOrgESDDataAttributes.runAPIv1ExampleRunnerImportOrgESDAttributeData();
+                                break;
+                            case 2:
+                                APIv1ExampleRunnerImportOrgESDDataCategories.runAPIv1ExampleRunnerImportOrgESDCategoryData();
+                                break;
+                            case 3:
+                                APIv1ExampleRunnerImportOrgESDDataMakers.runAPIv1ExampleRunnerImportOrgESDMakerData();
+                                break;
+                            case 4:
+                                APIv1ExampleRunnerImportOrgESDDataMakerModels.runAPIv1ExampleRunnerImportOrgESDMakerModelData();
+                                break;
+                            case 5:
+                                APIv1ExampleRunnerImportOrgESDDataMakerModelMappings.runAPIv1ExampleRunnerImportOrgESDMakerModelMappingData();
+                                break;
+                            case 6:
+                                APIv1ExampleRunnerImportOrgESDDataProducts.runAPIv1ExampleRunnerImportOrgESDProductData();
+                                break;
+                            case 7:
+                                APIv1ExampleRunnerImportOrgESDDataTaxcodes.runAPIv1ExampleRunnerImportOrgESDTaxcodeData();
+                                break;
+                        }
+
                         break;
                     case 11:
                         APIv1ExampleRunnerSearchCustomerAccountRecords.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
