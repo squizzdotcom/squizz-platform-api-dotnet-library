@@ -134,7 +134,7 @@ namespace Squizz.Platform.API.Examples.APIv1
 				
 				//check that the data successfully imported
 				if(endpointResponseESD.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS){
-                    Console.WriteLine("SUCCESS - attribute data successfully imported into the platform against the organisation");
+                    Console.WriteLine("SUCCESS - category data successfully imported into the platform against the organisation");
                 }
                 else{
                     Console.WriteLine("FAIL - category data failed to be imported into the platform against the organisation. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);

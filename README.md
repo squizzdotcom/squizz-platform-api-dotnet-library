@@ -966,7 +966,7 @@ This organisational data includes taxcodes, products, customer accounts, supplie
 This data is used to allow the organisation to buy and sell products, as well manage customers, suppliers, employees, and other people.
 Each type of data needs to be imported as an "Ecommerce Standards Document" that contains one or more records. Use the Ecommerce Standards library to easily create these documents and records.
 When importing one type of organisational data, it is important to import the full data set, otherwise the platform will deactivate un-imported data.
-For example if 3 products are imported, then a another products import is run that only imports 2 records, then 1 product will become deactivated and no longer be able to be sold.
+For example if 3 products are imported, then another products import is run that only imports 2 records, then 1 product will become deactivated and no longer be able to be sold.
 Read [https://www.squizz.com/docs/squizz/Platform-API-Endpoint:-Import-Organisation-Data.html](https://www.squizz.com/docs/squizz/Platform-API-Endpoint:-Import-Organisation-Data.html) for more documentation about the endpoint and its requirements.
 See the example below on how the call the Import Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
 
@@ -1058,7 +1058,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 //create a hashmap containing configurations of the organisation taxcode data
                 Dictionary<string, string> configs = new Dictionary<string, string>();
 
-                //add a dataFields attribute that contains a comma delimited list of tacode record fields that the API is allowed to insert, update in the platform
+                //add a dataFields attribute that contains a comma delimited list of taxcode record fields that the API is allowed to insert, update in the platform
                 configs.Add("dataFields", "keyTaxcodeID,taxcode,taxcodeLabel,description,taxcodePercentageRate");
 
                 //create a Ecommerce Standards Document that stores an array of taxcode records
