@@ -610,14 +610,14 @@ Read [https://www.squizz.com/docs/squizz/Platform-API-Endpoint:-Retrieve-Organis
 See the example below on how the call the Retrieve Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
 
 Other examples exist in this repository's examples folder on how to retrieve serveral different types of data. Note that some of these examples show how to different types of data can be retrieved and combined together, showing the interconnected nature of several data types:
- - Retrieve Products [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
- - Retrieve Product Stock Quantities [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
- - Retrieve Product Pricing [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
- - Retrieve Categories [APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs)
- - Retrieve Attributes [APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs)
- - Retrieve Makers [APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs)
- - Retrieve Maker Models [APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs)
- - Retrieve Maker Model Mappings [APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs)
+ - Retrieve Products [APIv1ExampleRunnerRetrieveOrgESDDataProduct.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataProduct.cs)
+ - Retrieve Product Stock Quantities [APIv1ExampleRunnerRetrieveOrgESDDataProductStock.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataProductStock.cs)
+ - Retrieve Product Pricing [APIv1ExampleRunnerRetrieveOrgESDDataPrice.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataPrice.cs)
+ - Retrieve Categories [APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs)
+ - Retrieve Attributes [APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs)
+ - Retrieve Makers [APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs)
+ - Retrieve Maker Models [APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs)
+ - Retrieve Maker Model Mappings [APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1/APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs)
 
 ```csharp
 using System;
