@@ -30,15 +30,24 @@ namespace Squizz.Platform.API.Examples.APIv1
                 "  - Validate/Create Organisation API Sesssion",
                 "  - Procure Purchase Order From Supplier",
                 "  - Create Organisation Notification",
-                "  - Retrieve Supplier Organisation Product Data",
-                "  - Retrieve Supplier Organisation Pricing Data",
-                "  - Retrieve Supplier Organisation Stock Availability Data",
-                " - Import Organisation Data",
-                " - Search Supplier Organisation Customer Account Records",
-                " - Retrieve Supplier Organisation Customer Account Record",
+                "  - Retrieve Organisation (Supplier/Customer/Own) Data",
+                "  - Import Organisation Data",
+                "  - Search Supplier Organisation Customer Account Records",
+                "  - Retrieve Supplier Organisation Customer Account Record",
                 " - Search and Retrieve Supplier Organisation Invoice Records For Purchase Order",
                 " - Send Customer Invoice To Customer",
                 " - Quit"
+            };
+
+            string[] dataRetrieveMenuOptions = new string[]{
+                "  - Retrieve Attributes",
+                "  - Retrieve Categories",
+                "  - Retrieve Makers",
+                "  - Retrieve Maker Models",
+                "  - Retrieve Maker Model Mappings",
+                "  - Retrieve Products",
+                "  - Retrieve Product Stock Availability",
+                "  - Retrieve Product Pricing"
             };
 
             string[] dataImportMenuOptions = new string[]{
@@ -123,15 +132,72 @@ namespace Squizz.Platform.API.Examples.APIv1
                         APIv1ExampleRunnerCreateOrgNotification.runAPIv1ExampleRunnerCreateOrgNotification();
                         break;
                     case 7:
-                        APIv1ExampleRunnerRetrieveOrgESDDataProduct.runAPIv1ExampleRunnerRetrieveOrgESDDataProduct();
+
+                        Console.WriteLine(CONSOLE_LINE);
+                        Console.WriteLine("Select from one of the data imports to run: ");
+                        Console.WriteLine(CONSOLE_LINE);
+
+                        //display menu options
+                        for (int i = 0; i < dataRetrieveMenuOptions.Length; i++)
+                        {
+                            Console.WriteLine((i + 1).ToString() + dataRetrieveMenuOptions[i]);
+                        }
+
+                        bool dataRetrieveOptionSelected = false;
+                        int dataRetrieveOptionNumber = dataRetrieveMenuOptions.Length;
+
+                        //get the selected option
+                        while (!dataRetrieveOptionSelected)
+                        {
+                            Console.Write("Enter Menu Option Number: ");
+                            try
+                            {
+                                //get the option that the user entered
+                                string optionEntered = Console.ReadLine().Trim();
+
+                                //if the user hit the q key then quit the application
+                                if (optionEntered.ToLower() == "q")
+                                {
+                                    return;
+                                }
+
+                                dataRetrieveOptionNumber = Convert.ToInt32(optionEntered);
+                                dataRetrieveOptionSelected = (dataRetrieveOptionNumber >= 1 && dataRetrieveOptionNumber <= dataRetrieveMenuOptions.Length);
+                            }
+                            catch (Exception ex) { }
+                        }
+
+                        //run the selected example
+                        switch (dataRetrieveOptionNumber)
+                        {
+                            case 1:
+                                APIv1ExampleRunnerRetrieveOrgESDDataAttributes.runAPIv1ExampleRunnerRetrieveOrgESDDataAttribute();
+                                break;
+                            case 2:
+                                APIv1ExampleRunnerRetrieveOrgESDDataCategories.runAPIv1ExampleRunnerRetrieveOrgESDDataCategories();
+                                break;
+                            case 3:
+                                APIv1ExampleRunnerRetrieveOrgESDDataMakers.runAPIv1ExampleRunnerRetrieveOrgESDDataMakers();
+                                break;
+                            case 4:
+                                APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.runAPIv1ExampleRunnerRetrieveOrgESDDataMakerModels();
+                                break;
+                            case 5:
+                                APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.runAPIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings();
+                                break;
+                            case 6:
+                                APIv1ExampleRunnerRetrieveOrgESDDataProduct.runAPIv1ExampleRunnerRetrieveOrgESDDataProduct();
+                                break;
+                            case 7:
+                                APIv1ExampleRunnerRetrieveOrgESDDataProductStock.runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock();
+                                break;
+                            case 8:
+                                APIv1ExampleRunnerRetrieveOrgESDDataPrice.runAPIv1ExampleRunnerRetrieveOrgESDDataPrice();
+                                break;
+                        }
+
                         break;
                     case 8:
-                        APIv1ExampleRunnerRetrieveOrgESDDataPrice.runAPIv1ExampleRunnerRetrieveOrgESDDataPrice();
-                        break;
-                    case 9:
-                        APIv1ExampleRunnerRetrieveOrgESDDataProductStock.runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock();
-                        break;
-                    case 10:
 
                         Console.WriteLine(CONSOLE_LINE);
                         Console.WriteLine("Select from one of the data imports to run: ");
@@ -194,16 +260,16 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
 
                         break;
-                    case 11:
+                    case 9:
                         APIv1ExampleRunnerSearchCustomerAccountRecords.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
                         break;
-                    case 12:
+                    case 10:
                         APIv1ExampleRunnerRetrieveCustomerAccountRecord.runAPIv1ExampleRunnerRetrieveCustomerAccountRecord();
                         break;
-                    case 13:
+                    case 11:
                         APIv1ExampleRunnerSearchRetrieveSupplierInvoiceRecordsForPurchaseOrder.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
                         break;
-                    case 14:
+                    case 12:
                         APIv1ExampleRunnerSendCustomerInvoiceToCustomer.runAPIv1ExampleRunnerSendCustomerInvoiceToCustomer();
                         break;
                     default:

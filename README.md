@@ -20,9 +20,6 @@ If you are a software developer writing a .NET application then we recommend tha
 	* [Send and Procure Purchase Order From Supplier Endpoint](#send-and-procure-purchase-order-from-supplier-endpoint)
 	* [Send Customer Invoices to Customer Endpoint](#send-customer-invoices-to-customer-endpoint)
     * [Retrieve Organisation Data Endpoint](#retrieve-organisation-data-endpoint)
-		* [Retrieve Organisation Product Data Example](#retrieve-organisation-product-data-example)
-		* [Retrieve Organisation Pricing Data Example](#retrieve-organisation-pricing-data-example)
-		* [Retrieve Organisation Stock Availability Example](#retrieve-organisation-stock-availability-example)
 	* [Import Organisation Data Endpoint](#import-organisation-data-endpoint)
     * [Search Customer Account Records Endpoint](#search-customer-account-records-endpoint)
 	* [Retrieve Customer Account Record Endpoint](#retrieve-customer-account-record-endpoint)
@@ -35,7 +32,7 @@ If you are a software developer writing a .NET application then we recommend tha
 
 To get started using the library within .NET applications, you can download the API library and its dependent libraries into your Visual Studio solution from [NuGET](https://www.nuget.org/) package manager. The library is hosted at [NuGet Squizz.Platform.API](https://www.nuget.org/packages/Squizz.Platform.API/) package. You can install the NuGET hosted package with the command line below, or visually find and install the package using [Visual Studio NuGET Package Manager](https://marketplace.visualstudio.com/items?itemName=NuGetTeam.NuGetPackageManager) plugin.
 ```
-Install-Package Squizz.Platform.API -Version 1.2.0
+Install-Package Squizz.Platform.API -Version 1.3.1
 ```
 Alternatively you can download and add the required files direct from the [Release page](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/releases). Once done then add references to the DLL files in your visual studio solution.
 The library contains dependencies on [Newtonsoft's Json.NET Library](https://www.newtonsoft.com/json) as well as the [Ecommerce Standards Documents .NET Library](https://github.com/squizzdotcom/ecommerce-standards-documents-dotnet-library)
@@ -606,13 +603,22 @@ namespace Squizz.Platform.API.Examples.APIv1
 
 ### Retrieve Organisation Data Endpoint
 The SQUIZZ.com platform's API has an endpoint that allows a variety of different types of data to be retrieved from another organisation stored on the platform.
-The organisational data that can be retrieved includes products, product stock quantities, and product pricing.
+The organisational data that can be retrieved includes products, product stock quantities, product pricing, categories, attributes, makers, maker models and maker model mappings.
 The data retrieved can be used to allow an organisation to set additional information about products being bought or sold, as well as being used in many other ways.
-Each kind of data retrieved from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with each document containing an array of zero or more records. Use the Ecommerce Standards library to easily read through these documents and records, to find data natively using .NET classes.
-Read [https://www.squizz.com/docs/squizz/Platform-API.html#section969](https://www.squizz.com/docs/squizz/Platform-API.html#section969) for more documentation about the endpoint and its requirements.
-See examples below on how the call the Retrieve Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
+Each kind of data retrieved from endpoint is formatted as JSON data conforming to the "Ecommerce Standards Document" standards, with each document containing an array of zero or more records. Use the Ecommerce Standards library to easily read through these documents and records, to find data natively using Java classes.
+Read [https://www.squizz.com/docs/squizz/Platform-API-Endpoint:-Retrieve-Organisation-Data.html](https://www.squizz.com/docs/squizz/Platform-API-Endpoint:-Retrieve-Organisation-Data.html) for more documentation about the endpoint and its requirements.
+See the example below on how the call the Retrieve Organisation ESD Data endpoint. Note that a session must first be created in the API before calling the endpoint.
 
-### Retrieve Organisation Product Data Example
+Other examples exist in this repository's examples folder on how to retrieve serveral different types of data. Note that some of these examples show how to different types of data can be retrieved and combined together, showing the interconnected nature of several data types:
+ - Retrieve Products [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
+ - Retrieve Product Stock Quantities [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
+ - Retrieve Product Pricing [APIv1ExampleRunnerRetrieveOrgESDData.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDData.cs)
+ - Retrieve Categories [APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataCategories.cs)
+ - Retrieve Attributes [APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataAttributes.cs)
+ - Retrieve Makers [APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakers.cs)
+ - Retrieve Maker Models [APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakerModels.cs)
+ - Retrieve Maker Model Mappings [APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs](https://github.com/squizzdotcom/squizz-platform-api-dotnet-library/blob/master/Source/Examples/APIv1ExampleRunnerRetrieveOrgESDDataMakerModelMappings.cs)
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -662,7 +668,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
             }
 
-            //retrieve organisation data if the API was successfully created
+            //import organisation data if the API was successfully created
             if (apiOrgSession.doesSessionExist())
             {
                 //after 60 seconds give up on waiting for a response from the API when creating the notification
@@ -674,7 +680,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 while(hasMoreRecordsToRetrieve)
                 {
                     //call the platform's API to get the supplier organisation's product data
-                    APIv1EndpointResponseESD<ESDocumentProduct> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProduct.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
+                    APIv1EndpointResponseESD<ESDocumentProduct> endpointResponseESD = APIv1EndpointOrgRetrieveESDocument.callRetrieveProducts(apiOrgSession, timeoutMilliseconds, supplierOrgID, APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST, recordStartIndex, "");
                     ESDocumentProduct esDocumentProduct = (ESDocumentProduct)endpointResponseESD.esDocument;
 
                     //check that the data successfully retrieved
@@ -707,240 +713,8 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
 
                         //check to see if a full page of records were retrieved and if there is more records to get
-                        if (esDocumentProduct.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST) {
-                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST;
-                        }else{
-                            hasMoreRecordsToRetrieve = false;
-                        }
-                    } else {
-                        Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
-                        break;
-                    }
-                }
-
-                //next steps
-                //call other API endpoints...
-                //destroy API session when done...
-                apiOrgSession.destroyOrgSession();
-            }
-        }
-    }
-}
-```
-
-### Retrieve Organisation Pricing Data Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Squizz.Platform.API.v1;
-using Squizz.Platform.API.v1.endpoint;
-using EcommerceStandardsDocuments;
-
-namespace Squizz.Platform.API.Examples.APIv1
-{
-    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then retrieves Ecommerce data from a conencted organisation in the platform</summary>
-    public class APIv1ExampleRunnerRetrieveOrgESDDataPrice
-    {
-        public static void runAPIv1ExampleRunnerRetrieveOrgESDDataPrice()
-        {
-            Console.WriteLine("Example - Retrieve Supplier Organisation Pricing Data");
-            Console.WriteLine("");
-
-            //obtain or load in an organisation's API credentials, in this example from the user in the console
-            Console.WriteLine("Enter Organisation ID:");
-            string orgID = Console.ReadLine();
-            Console.WriteLine("Enter Organisation API Key:");
-            string orgAPIKey = Console.ReadLine();
-            Console.WriteLine("Enter Organisation API Password:");
-            string orgAPIPass = Console.ReadLine();
-            Console.WriteLine("Enter Supplier Organisation ID:");
-            string supplierOrgID = Console.ReadLine();
-            Console.WriteLine("(Optioanally) Enter Supplier's Customer Account Code:");
-            string customerAccountCode = Console.ReadLine();
-
-            //create an API session instance
-            int sessionTimeoutMilliseconds = 20000;
-            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
-
-            //call the platform's API to request that a session is created
-            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
-
-            //check if the organisation's credentials were correct and that a session was created in the platform's API
-            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
-            {
-                //session has been created so now can call other API endpoints
-                Console.WriteLine("SUCCESS - API session has successfully been created.");
-            }
-            else
-            {
-                //session failed to be created
-                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
-            }
-
-            //retrieve organisation data if the API was successfully created
-            if (apiOrgSession.doesSessionExist())
-            {
-                //after 60 seconds give up on waiting for a response from the API when creating the notification
-                int timeoutMilliseconds = 60000;
-
-                //loop through retrieving pages of records from the API
-                bool hasMoreRecordsToRetrieve = true;
-                int recordStartIndex = 0;
-                while(hasMoreRecordsToRetrieve)
-                {
-                    //call the platform's API to get the supplier organisation's pricing data
-                    APIv1EndpointResponseESD<ESDocumentPrice> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentPrice.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST);
-                    ESDocumentPrice esDocumentPrice = (ESDocumentPrice)endpointResponseESD.esDocument;
-
-                    //check that the data successfully retrieved
-                    if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
-                    {
-                        Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
-                        Console.WriteLine("Pricing Records Returned: " + esDocumentPrice.totalDataRecords);
-
-                        //check that records have been placed into the standards document
-                        if (esDocumentPrice.dataRecords != null) {
-                            Console.WriteLine("Product Records:");
-
-                            //iterate through each price record stored within the standards document
-                            int i = 0;
-                            foreach(ESDRecordPrice priceRecord in esDocumentPrice.dataRecords)
-                            {
-                                //output details of the product record
-                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
-                                Console.WriteLine("  Product Record #: " + i);
-                                Console.WriteLine("  Key Product ID: " + priceRecord.keyProductID);
-                                Console.WriteLine("Key Sell Unit ID: " + priceRecord.keySellUnitID);
-                                Console.WriteLine("        Quantity: " + priceRecord.quantity);
-                                Console.WriteLine("           Price: " + priceRecord.price);
-                                if(priceRecord.taxRate != 0){
-                                    Console.WriteLine("        Tax Rate: " + priceRecord.taxRate);
-                                }
-                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
-
-                                i++;
-                            }
-                        }
-
-                        //check to see if a full page of records were retrieved and if there is more records to get
-                        if (esDocumentPrice.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST) {
-                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST;
-                        }else{
-                            hasMoreRecordsToRetrieve = false;
-                        }
-                    } else {
-                        Console.WriteLine("FAIL - organisation data failed to be obtained from the platform. Reason: " + endpointResponseESD.result_message + " Error Code: " + endpointResponseESD.result_code);
-                        break;
-                    }
-                }
-
-                //next steps
-                //call other API endpoints...
-                //destroy API session when done...
-                apiOrgSession.destroyOrgSession();
-            }
-        }
-    }
-}
-```
-
-### Retrieve Organisation Stock Availability Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Squizz.Platform.API.v1;
-using Squizz.Platform.API.v1.endpoint;
-using EcommerceStandardsDocuments;
-
-namespace Squizz.Platform.API.Examples.APIv1
-{
-    /// <summary>Shows an example of creating a organisation session with the SQUIZZ.com platform's API, then retrieves Ecommerce data from a conencted organisation in the platform</summary>
-    public class APIv1ExampleRunnerRetrieveOrgESDDataProductStock
-    {
-        public static void runAPIv1ExampleRunnerRetrieveOrgESDDataProductStock()
-        {
-            Console.WriteLine("Example - Retrieve Supplier Organisation Product Stock Data");
-            Console.WriteLine("");
-
-            //obtain or load in an organisation's API credentials, in this example from the user in the console
-            Console.WriteLine("Enter Organisation ID:");
-            string orgID = Console.ReadLine();
-            Console.WriteLine("Enter Organisation API Key:");
-            string orgAPIKey = Console.ReadLine();
-            Console.WriteLine("Enter Organisation API Password:");
-            string orgAPIPass = Console.ReadLine();
-            Console.WriteLine("Enter Supplier Organisation ID:");
-            string supplierOrgID = Console.ReadLine();
-
-            //create an API session instance
-            int sessionTimeoutMilliseconds = 20000;
-            APIv1OrgSession apiOrgSession = new APIv1OrgSession(orgID, orgAPIKey, orgAPIPass, sessionTimeoutMilliseconds, APIv1Constants.SUPPORTED_LOCALES_EN_AU);
-
-            //call the platform's API to request that a session is created
-            APIv1EndpointResponse endpointResponse = apiOrgSession.createOrgSession();
-
-            //check if the organisation's credentials were correct and that a session was created in the platform's API
-            if (endpointResponse.result.ToUpper() == APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
-            {
-                //session has been created so now can call other API endpoints
-                Console.WriteLine("SUCCESS - API session has successfully been created.");
-            }
-            else
-            {
-                //session failed to be created
-                Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
-            }
-
-            //retrieve organisation data if the API was successfully created
-            if (apiOrgSession.doesSessionExist())
-            {
-                //after 60 seconds give up on waiting for a response from the API when creating the notification
-                int timeoutMilliseconds = 60000;
-
-                //loop through retrieving pages of records from the API
-                bool hasMoreRecordsToRetrieve = true;
-                int recordStartIndex = 0;
-                while(hasMoreRecordsToRetrieve)
-                {
-                    //call the platform's API to get the supplier organisation's product stock data
-                    APIv1EndpointResponseESD<ESDocumentStockQuantity> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProductStock.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
-                    ESDocumentStockQuantity esDocumentStockQuantity = (ESDocumentStockQuantity)endpointResponseESD.esDocument;
-
-                    //check that the data successfully retrieved
-                    if (endpointResponseESD.result.ToUpper()==APIv1EndpointResponse.ENDPOINT_RESULT_SUCCESS)
-                    {
-                        Console.WriteLine("SUCCESS - organisation data successfully obtained from the platform");
-                        Console.WriteLine("Stock Records Returned: " + esDocumentStockQuantity.totalDataRecords);
-
-                        //check that records have been placed into the standards document
-                        if (esDocumentStockQuantity.dataRecords != null) {
-                            Console.WriteLine("Stock Quantity Records:");
-
-                            //iterate through each stock quantity record stored within the standards document
-                            int i = 0;
-                            foreach(ESDRecordStockQuantity stockRecord in esDocumentStockQuantity.dataRecords)
-                            {
-                                //output details of the stock quantity record
-                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
-                                Console.WriteLine("  Stock Record #: " + i);
-                                Console.WriteLine("  Key Product ID: " + stockRecord.keyProductID);
-                                Console.WriteLine(" Stock Available: " + stockRecord.qtyAvailable);
-								Console.WriteLine(" Stock Orderable: " + stockRecord.qtyOrderable);
-                                Console.WriteLine(APIv1ExampleRunner.CONSOLE_LINE);
-
-                                i++;
-                            }
-                        }
-
-                        //check to see if a full page of records were retrieved and if there is more records to get
-                        if (esDocumentStockQuantity.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST) {
-                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST;
+                        if (esDocumentProduct.totalDataRecords >= APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST;
                         }else{
                             hasMoreRecordsToRetrieve = false;
                         }

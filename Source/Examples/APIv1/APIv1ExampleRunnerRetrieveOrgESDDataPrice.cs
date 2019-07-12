@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2017 Squizz PTY LTD
+* Copyright (C) 2019 Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -66,7 +66,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 while(hasMoreRecordsToRetrieve)
                 {
                     //call the platform's API to get the supplier organisation's pricing data
-                    APIv1EndpointResponseESD<ESDocumentPrice> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentPrice.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST);
+                    APIv1EndpointResponseESD<ESDocumentPrice> endpointResponseESD = APIv1EndpointOrgRetrieveESDocument.callRetrievePrices(apiOrgSession, timeoutMilliseconds, supplierOrgID, customerAccountCode, APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST, recordStartIndex, "");
                     ESDocumentPrice esDocumentPrice = (ESDocumentPrice)endpointResponseESD.esDocument;
 
                     //check that the data successfully retrieved
@@ -100,8 +100,8 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
 
                         //check to see if a full page of records were retrieved and if there is more records to get
-                        if (esDocumentPrice.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST) {
-                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentPrice.MAX_RECORDS_PER_REQUEST;
+                        if (esDocumentPrice.totalDataRecords >= APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST;
                         }else{
                             hasMoreRecordsToRetrieve = false;
                         }

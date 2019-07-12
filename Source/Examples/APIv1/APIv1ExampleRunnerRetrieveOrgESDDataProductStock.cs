@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2017 Squizz PTY LTD
+* Copyright (C) 2019 Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -64,7 +64,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 while(hasMoreRecordsToRetrieve)
                 {
                     //call the platform's API to get the supplier organisation's product stock data
-                    APIv1EndpointResponseESD<ESDocumentStockQuantity> endpointResponseESD = APIv1EndpointOrgRetrieveESDocumentProductStock.call(apiOrgSession, timeoutMilliseconds, supplierOrgID, recordStartIndex, APIv1EndpointOrgRetrieveESDocumentProduct.MAX_RECORDS_PER_REQUEST);
+                    APIv1EndpointResponseESD<ESDocumentStockQuantity> endpointResponseESD = APIv1EndpointOrgRetrieveESDocument.callRetrieveStockQuantities(apiOrgSession, timeoutMilliseconds, supplierOrgID, APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST, recordStartIndex, "");
                     ESDocumentStockQuantity esDocumentStockQuantity = (ESDocumentStockQuantity)endpointResponseESD.esDocument;
 
                     //check that the data successfully retrieved
@@ -94,8 +94,8 @@ namespace Squizz.Platform.API.Examples.APIv1
                         }
 
                         //check to see if a full page of records were retrieved and if there is more records to get
-                        if (esDocumentStockQuantity.totalDataRecords >= APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST) {
-                            recordStartIndex += APIv1EndpointOrgRetrieveESDocumentProductStock.MAX_RECORDS_PER_REQUEST;
+                        if (esDocumentStockQuantity.totalDataRecords >= APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST) {
+                            recordStartIndex += APIv1EndpointOrgRetrieveESDocument.MAX_RECORDS_PER_REQUEST;
                         }else{
                             hasMoreRecordsToRetrieve = false;
                         }
