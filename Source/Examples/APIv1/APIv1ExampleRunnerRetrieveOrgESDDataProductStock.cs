@@ -52,7 +52,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 Console.WriteLine("FAIL - API session failed to be created. Reason: " + endpointResponse.result_message + " Error Code: " + endpointResponse.result_code);
             }
 
-            //import organisation data if the API was successfully created
+            //attempt retrieving supplying organisation product stock data if the API was successfully created
             if (apiOrgSession.doesSessionExist())
             {
                 //after 60 seconds give up on waiting for a response from the API when creating the notification
