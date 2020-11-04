@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2017 Squizz PTY LTD
+* Copyright (C) Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -135,8 +135,8 @@ namespace Squizz.Platform.API.Examples.APIv1
                 List<ESDRecordOrderPurchase> purchaseOrderRecords = new List<ESDRecordOrderPurchase>();
                 purchaseOrderRecords.Add(purchaseOrderRecord);
 
-                //after 60 seconds give up on waiting for a response from the API when creating the notification
-                int timeoutMilliseconds = 60000;
+                //after 120 seconds give up on waiting for a response from the API when procuring the order
+                int timeoutMilliseconds = 120000;
 
                 //create purchase order Ecommerce Standards document and add purchse order records to the document
                 ESDocumentOrderPurchase orderPurchaseESD = new ESDocumentOrderPurchase(ESDocumentConstants.RESULT_SUCCESS, "successfully obtained data", purchaseOrderRecords.ToArray(), new Dictionary<string, string>());

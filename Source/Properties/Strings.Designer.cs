@@ -19,7 +19,7 @@ namespace Squizz.Platform.API.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
@@ -313,6 +313,15 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling the SQUIZZ.com&apos;s API due to no customer account able to be found. Check that it has been imported for the organisation..
+        /// </summary>
+        internal static string SERVER_ERROR_NO_CUSTOMER_ACCOUNT_FOUND {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_NO_CUSTOMER_ACCOUNT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API, due to the platform unable to receive any data from the connected business system..
         /// </summary>
         internal static string SERVER_ERROR_NO_DATA_RETURNED {
@@ -367,6 +376,15 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to price one or more products in the order..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_LINE_PRICING_MISSING {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_LINE_PRICING_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to price a product in the supplier&apos;s organisation..
         /// </summary>
         internal static string SERVER_ERROR_ORDER_MAPPED_PRODUCT_PRICE_NOT_FOUND {
@@ -385,11 +403,47 @@ namespace Squizz.Platform.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to find a matching organisation&apos;s payment for the order..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_PAYMENT_NOT_MATCHED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_PAYMENT_NOT_MATCHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to find a matching product in the supplier&apos;s organisation..
         /// </summary>
         internal static string SERVER_ERROR_ORDER_PRODUCT_NOT_MAPPED {
             get {
                 return ResourceManager.GetString("SERVER_ERROR_ORDER_PRODUCT_NOT_MAPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to find a matching organisation&apos;s product for the order..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_PRODUCT_NOT_MATCHED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_PRODUCT_NOT_MATCHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to find a matching organisation&apos;s surcharge for the order..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_SURCHARGE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_SURCHARGE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to not being able to price one or more surcharges in the order..
+        /// </summary>
+        internal static string SERVER_ERROR_ORDER_SURCHARGE_PRICING_MISSING {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_ORDER_SURCHARGE_PRICING_MISSING", resourceCulture);
             }
         }
         
@@ -435,6 +489,15 @@ namespace Squizz.Platform.API.Properties {
         internal static string SERVER_ERROR_ORG_NOT_SELLING {
             get {
                 return ResourceManager.GetString("SERVER_ERROR_ORG_NOT_SELLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when calling SQUIZZ.com&apos;s API due to the payment status set for the order not being supported..
+        /// </summary>
+        internal static string SERVER_ERROR_PAYMENT_STATUS_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("SERVER_ERROR_PAYMENT_STATUS_NOT_SUPPORTED", resourceCulture);
             }
         }
         

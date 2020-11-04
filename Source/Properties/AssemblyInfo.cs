@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Squizz Pty Ltd")]
 [assembly: AssemblyProduct("SquizzPlatformAPILibrary")]
-[assembly: AssemblyCopyright("Copyright Squizz Pty Ltd ©  2019")]
+[assembly: AssemblyCopyright("Copyright Squizz Pty Ltd ©")]
 [assembly: AssemblyTrademark("SQUIZZ.com")]
 [assembly: AssemblyCulture("")]
 

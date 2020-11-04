@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2017 Squizz PTY LTD
+* Copyright (C) Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -71,6 +71,13 @@ namespace Squizz.Platform.API.v1.endpoint
         public const string ENDPOINT_RESULT_CODE_ERROR_INVOICE_SURCHARGE_TAXCODE_NOT_MAPPED = "SERVER_ERROR_INVOICE_SURCHARGE_TAXCODE_NOT_MAPPED";
         public const string ENDPOINT_RESULT_CODE_ERROR_NO_ORG_SUPPLIER_ACCOUNT_ASSIGNED = "SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_ASSIGNED";
         public const string ENDPOINT_RESULT_CODE_ERROR_NO_ORG_SUPPLIER_ACCOUNT_SET = "SERVER_ERROR_NO_ORG_SUPPLIER_ACCOUNT_SET";
+        public const string ENDPOINT_RESULT_CODE_ERROR_NO_CUSTOMER_ACCOUNT_FOUND = "SERVER_ERROR_NO_CUSTOMER_ACCOUNT_FOUND";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_ORDER_PRODUCT_NOT_MATCHED = "SERVER_ERROR_ORDER_PRODUCT_NOT_MATCHED";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_ORDER_LINE_PRICING_MISSING = "SERVER_ERROR_ORDER_LINE_PRICING_MISSING";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_ORDER_SURCHARGE_NOT_FOUND = "SERVER_ERROR_ORDER_SURCHARGE_NOT_FOUND";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_ORDER_SURCHARGE_PRICING_MISSING = "SERVER_ERROR_ORDER_SURCHARGE_PRICING_MISSING";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_ORDER_PAYMENT_NOT_MATCHED = "SERVER_ERROR_ORDER_PAYMENT_NOT_MATCHED";
+	    public const string ENDPOINT_RESULT_CODE_ERROR_PAYMENT_STATUS_NOT_SUPPORTED = "SERVER_ERROR_PAYMENT_STATUS_NOT_SUPPORTED";
 
         //set default values for the response
         [DataMember]

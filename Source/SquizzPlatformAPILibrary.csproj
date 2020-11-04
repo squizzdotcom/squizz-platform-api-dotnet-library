@@ -77,6 +77,7 @@
     <Compile Include="APIv1OrgSession.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgCreateNotification.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgImportESDocument.cs" />
+    <Compile Include="endpoint\APIv1EndpointOrgImportSalesOrder.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgProcurePurchaseOrderFromSupplier.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgRetrieveCustomerAccountRecord.cs" />
     <Compile Include="endpoint\APIv1EndpointOrgRetrieveESDocument.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataMakerModelMappings.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataMakerModels.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataMakers.cs" />
+    <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataOrderSales.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataProducts.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerImportOrgESDDataTaxcodes.cs" />
     <Compile Include="Examples\APIv1\APIv1ExampleRunnerProcurePurchaseOrderFromSupplier.cs" />

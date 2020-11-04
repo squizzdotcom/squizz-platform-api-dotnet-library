@@ -1,5 +1,5 @@
 ﻿/**
-* Copyright (C) 2019 Squizz PTY LTD
+* Copyright (C) Squizz PTY LTD
 * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
@@ -32,6 +32,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 "  - Create Organisation Notification",
                 "  - Retrieve Organisation (Supplier/Customer/Own) Data",
                 "  - Import Organisation Data",
+                "  - Import Organisation Sales Order",
                 "  - Search Supplier Organisation Customer Account Records",
                 "  - Retrieve Supplier Organisation Customer Account Record",
                 " - Search and Retrieve Supplier Organisation Invoice Records For Purchase Order",
@@ -261,15 +262,18 @@ namespace Squizz.Platform.API.Examples.APIv1
 
                         break;
                     case 9:
-                        APIv1ExampleRunnerSearchCustomerAccountRecords.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
+                        APIv1ExampleRunnerImportOrgESDDataOrderSales.runAPIv1ExampleRunnerImportOrgESDDataOrderSales();
                         break;
                     case 10:
-                        APIv1ExampleRunnerRetrieveCustomerAccountRecord.runAPIv1ExampleRunnerRetrieveCustomerAccountRecord();
+                        APIv1ExampleRunnerSearchCustomerAccountRecords.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
                         break;
                     case 11:
-                        APIv1ExampleRunnerSearchRetrieveSupplierInvoiceRecordsForPurchaseOrder.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
+                        APIv1ExampleRunnerRetrieveCustomerAccountRecord.runAPIv1ExampleRunnerRetrieveCustomerAccountRecord();
                         break;
                     case 12:
+                        APIv1ExampleRunnerSearchRetrieveSupplierInvoiceRecordsForPurchaseOrder.runAPIv1ExampleRunnerSearchCustomerAccountRecords();
+                        break;
+                    case 13:
                         APIv1ExampleRunnerSendCustomerInvoiceToCustomer.runAPIv1ExampleRunnerSendCustomerInvoiceToCustomer();
                         break;
                     default:
