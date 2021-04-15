@@ -37,6 +37,7 @@ namespace Squizz.Platform.API.Examples.APIv1
                 "  - Retrieve Supplier Organisation Customer Account Record",
                 " - Search and Retrieve Supplier Organisation Invoice Records For Purchase Order",
                 " - Send Customer Invoice To Customer",
+                " - Send Delivery Notice To Customer",
                 " - Quit"
             };
 
@@ -275,6 +276,9 @@ namespace Squizz.Platform.API.Examples.APIv1
                         break;
                     case 13:
                         APIv1ExampleRunnerSendCustomerInvoiceToCustomer.runAPIv1ExampleRunnerSendCustomerInvoiceToCustomer();
+                        break;
+                    case 14:
+                        APIv1ExampleRunnerSendDeliveryNoticeToCustomer.runAPIv1ExampleRunnerSendDeliveryNoticeToCustomer();
                         break;
                     default:
                         continueRunning = false;

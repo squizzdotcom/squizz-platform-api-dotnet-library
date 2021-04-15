@@ -63,6 +63,9 @@ namespace Squizz.Platform.API.v1
         /// <summary>name of the platform's API endpoint to call to send a customer invoice from a supplier organisation to a customer organisation</summary>
         public const string API_ORG_ENDPOINT_SEND_CUSTOMER_INVOICE_TO_CUSTOMER = "send_customer_invoice_to_customer";
 
+        /// <summary>name of the platform's API endpoint to call to send a delivery from a supplier organisation to a customer organisation or person</summary>
+        public const string API_ORG_ENDPOINT_SEND_DELIVERY_NOTICE_TO_CUSTOMER = "send_delivery_notice_to_customer";
+
         /// <summary>name of the endpoint attribute in the API endpoint response that contains the result code</summary>
         public const string API_ORG_ENDPOINT_ATTRIBUTE_RESULT_CODE = "result_code";
 
