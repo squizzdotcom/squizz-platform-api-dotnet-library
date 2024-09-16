@@ -90,6 +90,15 @@ namespace Squizz.Platform.API.Examples.APIv1
                 purchaseOrderRecord.billingOrgName = "Acme Industries International";
                 purchaseOrderRecord.billingContact = "John Citizen";
 
+                //set freight carrier information that may influence the supplying organisation on how to choose the freight carrier
+                purchaseOrderRecord.freightCarrierCode = "AUSPOST";
+                purchaseOrderRecord.freightCarrierName = "Australia Post";
+                purchaseOrderRecord.freightCarrierServiceCode = "EXPRESS";
+
+                // indicate if drop shipping is occurring, then optionally provide the purchase order code of the ultimate receiver if the supplying organisation neesd this
+                purchaseOrderRecord.isDropship = ESDocumentConstants.ESD_VALUE_NO;
+                //purchaseOrderRecord.deliveryPurchaseOrderCode = "PON123050343";
+
                 //create an array of purchase order lines
                 List<ESDRecordOrderPurchaseLine> orderLines = new List<ESDRecordOrderPurchaseLine>();
 
