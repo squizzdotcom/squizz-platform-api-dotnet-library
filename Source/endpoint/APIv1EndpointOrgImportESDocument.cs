@@ -31,6 +31,7 @@ namespace Squizz.Platform.API.v1.endpoint
         public const int IMPORT_TYPE_ID_ALTERNATE_CODES = 9;
         public const int IMPORT_TYPE_ID_PRODUCT_STOCK_QUANTITIES = 10;
 		public const int IMPORT_TYPE_ID_ATTRIBUTES = 11;
+        public const int IMPORT_TYPE_ID_PRODUCT_COMBINATIONS = 15;
         public const int IMPORT_TYPE_ID_SALES_REPRESENTATIVES = 16;
         public const int IMPORT_TYPE_ID_CUSTOMER_ACCOUNTS = 17;
         public const int IMPORT_TYPE_ID_SUPPLIER_ACCOUNTS = 18;
